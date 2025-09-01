@@ -1,0 +1,247 @@
+Indigo Website Concept — The Fashion Experience Model
+Company Overview: 
+
+
+“Indigo Event Rentals Austin” is a boutique event rental company that serves the Austin, TX market by providing comprehensive party and event rental services including chairs, tables, linens, table settings, wedding decorations, lighting, speakers, dance floors, and photo booths.
+
+The company’s mission is to become a trusted partner for clients, event planners, and venues seeking professional, reliable rental equipment and full delivery, setup, teardown, and pickup services.
+
+Maintaining a highly positive reputation with our customers is considered one of the most important aspects of how we run the business.  This means we are honest and upfront with customers, on-time for appointments, and follow through on our promises, even when doing so is difficult.  This level of customer service is reflected in our online reviews and in the recommendations that our previous clients give to others through word-of-mouth.
+
+Business Structure: Member-managed LLC (partnership), equally owned 50%/50% by two managing partners: Justin Lauria - Director of Business Development, and Amanda Vorpahl - Director of Operations.
+Justin Lauria - Founding Partner and Director of Business Development
+Background in technology, business operations, and project management
+Focus is on driving revenue growth and market expansion
+Manages:
+inventory and equipment
+logistics
+business relationships
+sales/marketing, branding, and media
+
+
+Amanda Vorpahl - Founding Partner and Director of Operations
+Background in science, office administration, and people management
+Focus is on coordinating daily operations and customer interaction
+Manages:
+orders, invoicing, and payments
+scheduling
+labor/human resources
+social media presence
+
+
+Website Details:
+Overall Feel
+Brand Concept: Indigo is not just an event rental company — it’s a fashion-inspired lifestyle brand. The website should feel like a fashion magazine meets luxury boutique, where browsing rentals feels like flipping through curated designer collections.
+
+
+Vibe: Editorial, boutique, curated — like browsing a high-end fashion brand’s site, but for event rentals. 
+
+
+Layout: Clean grid-based design, strong use of white space, full-width hero imagery, magazine-style typography.
+
+
+Tone: Empowering, confident, and gender-inclusive.Focused on expression and experience.
+
+
+UX: Fun to explore — browsing should feel more like shopping a fashion lookbook than checking boxes on a rental inventory list.
+
+
+Note: The website should feature a robust “shopping cart” quote booking system that allows customers to build their desired order as they browse the site, and then a “checkout” page where they can see the estimated cost of the items they chose (where they can change quantity), the estimated delivery fee (based on their location), the estimated setup fees (based on what they’re ordering), and pricing for an optional damage waiver.
+Visual Identity (quick summary)
+Typography:
+
+
+Headings: Bold serif (editorial, fashion-magazine feel).
+
+
+Body: Minimalist sans serif.
+
+
+1. Home
+Hero Section
+Background: Video loop or carousel of styled events if possible (a chic rooftop cocktail party, a romantic backyard wedding, a bold corporate gala) — each feels like a “collection drop.”  If that is too much for a first implementation, please include a full-width editorial photo (fashion-magazine styled event).
+
+
+Headline: [I don’t know, please come up with something]
+
+
+Hero section subcopy: “Every gathering deserves a signature look.”
+
+
+CTAs: [Browse Collections] [Get a Quote]
+
+Featured Collections (“Seasonal Lookbooks”):
+Grid showcasing curated bundles styled as fashion collections.
+
+
+Example: The Midnight Luxe Collection, The Garden Gala, The Modern Minimalist.
+
+“Style Your Event” Interactive Tool
+Visitors can filter by vibe: like Professional, Romantic, Chic, Playful, etc.
+
+
+Results populate with curated pieces that align with that vibe (not just a list of SKUs).
+
+
+Brand Story Section
+Headline: “Not Just Rentals. A Signature Style.”
+
+
+Text: Brief mission statement about helping every host craft a unique atmosphere with ease and flair.
+
+Social Proof / Gallery Preview:
+Instagram-style grid of real events, styled like fashion editorials.
+
+CTA Section:
+[Some headline that incorporates fashion references]
+
+
+CTA: [Start Styling Now]
+
+
+2. “Product Catalog” (Inventory/Product Pages)
+Format: Product catalog styled as a fashion boutique. Each category (Tables, Seating, Lighting) styled like fashion categories.
+
+
+Each rental item shown like a product card: editorial photo, name, and style notes. High-quality, editorial-style product photography (clean backgrounds, styled settings).
+
+
+Filters: Style, Color, Category, Popularity.
+
+
+Copy that evokes style rather than function:
+
+
+Instead of “60” Round Folding Table,” it’s: “The Circle — versatile and timeless, ideal for intimate gatherings or grand feasts.”
+
+
+Products in this section can be added to the shopping cart 
+
+
+
+3. “Designer Collections” (Packages and Bundles)
+Event setups shown as curated collections, like seasonal fashion lines:
+
+
+The Modern Minimalist (sleek tables, monochrome linens, solid-color chairs).
+
+
+The Bohemian Luxe (wooden farm tables, vintage lounge seating, patterned rugs).
+
+
+The Bold Statement (geometric arches, jewel-toned linens, dramatic lighting).
+CTAs: [Style My Event With This Look].
+
+
+Clicking into a collection feels like opening a fashion lookbook: styled photography, inspirational text, and easy “add to my event” functionality.
+i.e. Collections in this section can be added to the customer’s shopping cart all at once by clicking “add to my event”” and specifying how many guests will be at their event, then the website will intelligently add the amount (or size for items like dance floors) of each item appropriately in order to accommodate the specified amount of guests.
+4. “Lookbook” (Inspiration / Gallery)
+Stylized event setups as if they were photographed for a fashion magazine spread.
+
+Styled like a lookbook.
+
+Filters: Wedding, Corporate, Outdoor, Luxe, Minimalist.
+
+Each gallery tile links to inventory used.  Use messaging like “Shop the Look” to get customers to click.
+5. How It works
+Steps presented like a fashion atelier process:
+
+
+Consultation → Your fitting.
+
+
+Curation → Tailored to your event.
+
+
+Delivery & Styling → Runway-ready.
+
+
+Elegant timeline layout with icons.
+
+Contains FAQ section.
+
+6. “Local Styles” (Local Pages)
+SEO-targeted pages for Austin + surrounding areas.
+
+
+Content written like regional style guides:
+
+
+“Austin Weddings Styled Like Couture”
+
+
+“Round Rock Events with Runway Flair”
+
+
+Each includes: local event tips, styled Indigo packages, CTA to book locally.
+
+7. “The House of Indigo” (About Page)
+Brand story told like a designer fashion house origin story.
+
+
+Fashion-magazine inspired layout: oversized photography, bold typography.
+
+
+Narrative-driven: Indigo as the “design house” of events, with a mission to bring Austin gatherings effortless style.
+
+
+Showcase diversity in clients/events to reinforce inclusivity.
+
+
+Photos of founders/team styled like a fashion campaign (black & white portraits, chic minimal backdrop).
+
+8. “Book Your Style” (Quote / Contact Flow)
+Luxury concierge vibe.
+
+
+Positioning: Styled like booking a fashion consultation.
+
+
+Copy: “Ready to curate your event look? Let’s get started.”
+
+
+Simple form: Name, Email, Phone, Event Type, Date, Message.
+
+
+
+9. Blog
+Fashion-magazine style editorial content. SEO + inspirational value
+
+
+
+Notes for pages rebranded as a fashion term: Use the fashion label as the primary nav title.  Then add the practical term as a subtle subtitle/tooltip. This way, people feel like they’re stepping into a couture showroom, not a warehouse catalog, while still making sure SEO and usability are intact.
+
+SEO Implementation
+Title Tags & Meta Descriptions: Each page optimized with fashion + rental keywords.
+
+
+H1/H2 Strategy: Fashion-inspired but keyword-friendly.
+
+
+Alt Text: Descriptive + branded (e.g., “Indigo black-tie event rental 60 inch round table”).
+
+
+Internal Linking: Between Inventory, Packages, and Inspiration to keep customers exploring collections.
+
+Conversion Features
+Sticky floating “Get a Quote” button.
+
+
+Integrated Instagram grid (“Real Indigo Looks”) for social proof.
+
+
+Personalized recommendations: “If you liked The Bohemian Luxe, you might also love The Modern Minimalist.”
+
+Technical Features
+Fully mobile responsive.
+
+
+Fast load speeds, compressed editorial images.
+
+
+Schema markup for local business + FAQ.
+
+
+Blog structured for long-form SEO guides.
+
+✅ Result: Customers don’t just feel like they’re renting tables and chairs — they feel like they’re styling their event. The process feels like a luxury shopping experience, giving Indigo a fashion house aura that sets it apart from warehouse-style competitors.
