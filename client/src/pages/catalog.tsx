@@ -125,79 +125,86 @@ export default function Catalog() {
                       <h2 className="text-3xl font-serif font-bold mb-2">{getCategoryLabel(category)}</h2>
                       <div className="w-24 h-1 bg-primary mx-auto"></div>
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" data-testid={`${category}-products-grid`}>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" data-testid={`${category}-products-grid`}>
                       {categoryProducts.map((product) => (
-                        <Card
+                        <div
                           key={product.id}
-                          className="product-card bg-white border shadow-sm hover:shadow-md transition-shadow"
+                          className="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow"
                           data-testid={`product-card-${product.id}`}
                         >
-                          <div className="relative">
+                          {/* Image Section */}
+                          <div className="relative h-48 bg-gray-100">
                             <img
                               src={product.imageUrl}
                               alt={product.name}
-                              className="w-full h-56 object-cover"
+                              className="w-full h-full object-cover"
                             />
                             {product.vibe && product.vibe.length > 0 && (
-                              <div className="absolute top-3 left-3">
-                                <Badge variant="secondary" className="bg-black/70 text-white text-xs">
+                              <div className="absolute top-2 left-2">
+                                <span className="bg-black/70 text-white text-xs px-2 py-1 rounded">
                                   {product.vibe[0].charAt(0).toUpperCase() + product.vibe[0].slice(1)}
-                                </Badge>
+                                </span>
                               </div>
                             )}
                           </div>
                           
-                          <div className="p-4 space-y-3">
-                            <div>
-                              <h3 className="font-serif text-lg font-semibold leading-tight">{product.name}</h3>
-                              <p className="text-sm text-muted-foreground mt-1 line-clamp-2">
+                          {/* Content Section */}
+                          <div className="p-4">
+                            {/* Product Info */}
+                            <div className="mb-3">
+                              <h3 className="font-serif text-lg font-semibold text-gray-900 leading-tight mb-1">
+                                {product.name}
+                              </h3>
+                              <p className="text-sm text-gray-600 line-clamp-2">
                                 {product.description}
                               </p>
                             </div>
                             
-                            <div className="text-lg font-medium text-primary" data-testid={`price-${product.id}`}>
-                              ${product.price} each
+                            {/* Price */}
+                            <div className="mb-4">
+                              <span className="text-lg font-semibold text-primary" data-testid={`price-${product.id}`}>
+                                ${product.price} each
+                              </span>
                             </div>
                             
-                            <div className="flex items-center gap-2 pt-2">
-                              <div className="flex items-center border rounded">
-                                <Button
-                                  variant="ghost"
-                                  size="sm"
-                                  className="h-9 w-9 p-0 hover:bg-gray-100"
+                            {/* Quantity Controls */}
+                            <div className="mb-3">
+                              <div className="flex items-center justify-center border border-gray-300 rounded w-28 mx-auto">
+                                <button
+                                  className="flex items-center justify-center w-8 h-8 text-gray-600 hover:bg-gray-100"
                                   onClick={() => updateQuantity(product.id, getQuantity(product.id) - 1)}
                                   data-testid={`decrease-quantity-${product.id}`}
                                 >
-                                  <Minus className="h-4 w-4" />
-                                </Button>
-                                <Input
+                                  <Minus className="h-3 w-3" />
+                                </button>
+                                <input
                                   type="number"
                                   min="1"
                                   value={getQuantity(product.id)}
                                   onChange={(e) => updateQuantity(product.id, parseInt(e.target.value) || 1)}
-                                  className="h-9 w-14 text-center border-0 focus:ring-0 text-sm font-medium"
+                                  className="w-12 h-8 text-center text-sm font-medium border-0 bg-transparent focus:outline-none"
                                   data-testid={`quantity-input-${product.id}`}
                                 />
-                                <Button
-                                  variant="ghost"
-                                  size="sm"
-                                  className="h-9 w-9 p-0 hover:bg-gray-100"
+                                <button
+                                  className="flex items-center justify-center w-8 h-8 text-gray-600 hover:bg-gray-100"
                                   onClick={() => updateQuantity(product.id, getQuantity(product.id) + 1)}
                                   data-testid={`increase-quantity-${product.id}`}
                                 >
-                                  <Plus className="h-4 w-4" />
-                                </Button>
+                                  <Plus className="h-3 w-3" />
+                                </button>
                               </div>
-                              <Button
-                                className="flex-1 h-9"
-                                onClick={() => addToCart(product)}
-                                data-testid={`add-to-cart-${product.id}`}
-                              >
-                                Add to Cart
-                              </Button>
                             </div>
+                            
+                            {/* Add to Cart Button */}
+                            <button
+                              className="w-full bg-primary text-white py-2 px-4 rounded font-medium hover:bg-primary/90 transition-colors"
+                              onClick={() => addToCart(product)}
+                              data-testid={`add-to-cart-${product.id}`}
+                            >
+                              Add to Cart
+                            </button>
                           </div>
-                        </Card>
+                        </div>
                       ))}
                     </div>
                   </div>
@@ -206,79 +213,86 @@ export default function Catalog() {
             </div>
           ) : (
             /* Single category view */
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 auto-rows-fr" data-testid="products-grid">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" data-testid="products-grid">
               {displayProducts.map((product) => (
-                <Card
+                <div
                   key={product.id}
-                  className="product-card bg-white border shadow-sm hover:shadow-md transition-shadow"
+                  className="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow"
                   data-testid={`product-card-${product.id}`}
                 >
-                  <div className="relative">
+                  {/* Image Section */}
+                  <div className="relative h-48 bg-gray-100">
                     <img
                       src={product.imageUrl}
                       alt={product.name}
-                      className="w-full h-56 object-cover"
+                      className="w-full h-full object-cover"
                     />
                     {product.vibe && product.vibe.length > 0 && (
-                      <div className="absolute top-3 left-3">
-                        <Badge variant="secondary" className="bg-black/70 text-white text-xs">
+                      <div className="absolute top-2 left-2">
+                        <span className="bg-black/70 text-white text-xs px-2 py-1 rounded">
                           {product.vibe[0].charAt(0).toUpperCase() + product.vibe[0].slice(1)}
-                        </Badge>
+                        </span>
                       </div>
                     )}
                   </div>
                   
-                  <div className="p-4 space-y-3">
-                    <div>
-                      <h3 className="font-serif text-lg font-semibold leading-tight">{product.name}</h3>
-                      <p className="text-sm text-muted-foreground mt-1 line-clamp-2">
+                  {/* Content Section */}
+                  <div className="p-4">
+                    {/* Product Info */}
+                    <div className="mb-3">
+                      <h3 className="font-serif text-lg font-semibold text-gray-900 leading-tight mb-1">
+                        {product.name}
+                      </h3>
+                      <p className="text-sm text-gray-600 line-clamp-2">
                         {product.description}
                       </p>
                     </div>
                     
-                    <div className="text-lg font-medium text-primary" data-testid={`price-${product.id}`}>
-                      ${product.price} each
+                    {/* Price */}
+                    <div className="mb-4">
+                      <span className="text-lg font-semibold text-primary" data-testid={`price-${product.id}`}>
+                        ${product.price} each
+                      </span>
                     </div>
                     
-                    <div className="flex items-center gap-2 pt-2">
-                      <div className="flex items-center border rounded">
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          className="h-9 w-9 p-0 hover:bg-gray-100"
+                    {/* Quantity Controls */}
+                    <div className="mb-3">
+                      <div className="flex items-center justify-center border border-gray-300 rounded w-28 mx-auto">
+                        <button
+                          className="flex items-center justify-center w-8 h-8 text-gray-600 hover:bg-gray-100"
                           onClick={() => updateQuantity(product.id, getQuantity(product.id) - 1)}
                           data-testid={`decrease-quantity-${product.id}`}
                         >
-                          <Minus className="h-4 w-4" />
-                        </Button>
-                        <Input
+                          <Minus className="h-3 w-3" />
+                        </button>
+                        <input
                           type="number"
                           min="1"
                           value={getQuantity(product.id)}
                           onChange={(e) => updateQuantity(product.id, parseInt(e.target.value) || 1)}
-                          className="h-9 w-14 text-center border-0 focus:ring-0 text-sm font-medium"
+                          className="w-12 h-8 text-center text-sm font-medium border-0 bg-transparent focus:outline-none"
                           data-testid={`quantity-input-${product.id}`}
                         />
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          className="h-9 w-9 p-0 hover:bg-gray-100"
+                        <button
+                          className="flex items-center justify-center w-8 h-8 text-gray-600 hover:bg-gray-100"
                           onClick={() => updateQuantity(product.id, getQuantity(product.id) + 1)}
                           data-testid={`increase-quantity-${product.id}`}
                         >
-                          <Plus className="h-4 w-4" />
-                        </Button>
+                          <Plus className="h-3 w-3" />
+                        </button>
                       </div>
-                      <Button
-                        className="flex-1 h-9"
-                        onClick={() => addToCart(product)}
-                        data-testid={`add-to-cart-${product.id}`}
-                      >
-                        Add to Cart
-                      </Button>
                     </div>
+                    
+                    {/* Add to Cart Button */}
+                    <button
+                      className="w-full bg-primary text-white py-2 px-4 rounded font-medium hover:bg-primary/90 transition-colors"
+                      onClick={() => addToCart(product)}
+                      data-testid={`add-to-cart-${product.id}`}
+                    >
+                      Add to Cart
+                    </button>
                   </div>
-                </Card>
+                </div>
               ))}
             </div>
           )}
