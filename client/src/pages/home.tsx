@@ -6,11 +6,13 @@ import { useCartHelpers } from '@/lib/cart-context';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Sparkles, Star, Users, ArrowRight, Phone, Mail, MapPin } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Sparkles, Star, Users, ArrowRight, Phone, Mail, MapPin, Plus, Minus } from 'lucide-react';
 
 export default function Home() {
   const { addItem } = useCartHelpers();
   const [selectedVibe, setSelectedVibe] = useState<string>('');
+  const [quantities, setQuantities] = useState<Record<string, number>>({});
 
   const { data: products = [] } = useQuery<Product[]>({
     queryKey: ['/api/products'],
@@ -28,6 +30,21 @@ export default function Home() {
   const vibes = ['professional', 'romantic', 'chic', 'playful', 'luxe'];
 
   const featuredCollections = collections.slice(0, 3);
+
+  const getQuantity = (productId: string) => quantities[productId] || 1;
+
+  const updateQuantity = (productId: string, newQuantity: number) => {
+    if (newQuantity >= 1) {
+      setQuantities(prev => ({ ...prev, [productId]: newQuantity }));
+    }
+  };
+
+  const addToCart = (product: Product) => {
+    const quantity = getQuantity(product.id);
+    for (let i = 0; i < quantity; i++) {
+      addItem(product);
+    }
+  };
 
   return (
     <main className="pt-20">
@@ -106,25 +123,59 @@ export default function Home() {
               vibeProducts.length > 0 ? (
                 vibeProducts.slice(0, 3).map((product) => (
                   <Card key={product.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-                    <div className="relative">
+                    <div>
                       <img
                         src={product.imageUrl}
                         alt={product.name}
                         className="w-full h-48 object-cover"
                       />
-                      <Button
-                        size="sm"
-                        className="absolute top-4 right-4 bg-white/90 text-primary hover:bg-white"
-                        onClick={() => addItem(product)}
-                        data-testid={`add-to-cart-${product.id}`}
-                      >
-                        <Sparkles className="h-4 w-4" />
-                      </Button>
                     </div>
                     <CardContent className="p-4">
                       <h3 className="font-serif text-lg font-bold mb-2">{product.name}</h3>
-                      <p className="text-sm text-muted-foreground mb-2">{product.description}</p>
-                      <p className="font-medium">${product.price} each</p>
+                      <p className="text-sm text-muted-foreground mb-3">{product.description}</p>
+                      <div className="flex items-center justify-between mb-4">
+                        <p className="font-medium">${product.price} each</p>
+                      </div>
+                      
+                      {/* Quantity Controls */}
+                      <div className="flex items-center gap-3">
+                        <div className="flex items-center border rounded-md">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="h-8 w-8 p-0"
+                            onClick={() => updateQuantity(product.id, getQuantity(product.id) - 1)}
+                            data-testid={`decrease-quantity-${product.id}`}
+                          >
+                            <Minus className="h-3 w-3" />
+                          </Button>
+                          <Input
+                            type="number"
+                            min="1"
+                            value={getQuantity(product.id)}
+                            onChange={(e) => updateQuantity(product.id, parseInt(e.target.value) || 1)}
+                            className="h-8 w-12 text-center border-0 text-sm"
+                            data-testid={`quantity-input-${product.id}`}
+                          />
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="h-8 w-8 p-0"
+                            onClick={() => updateQuantity(product.id, getQuantity(product.id) + 1)}
+                            data-testid={`increase-quantity-${product.id}`}
+                          >
+                            <Plus className="h-3 w-3" />
+                          </Button>
+                        </div>
+                        <Button
+                          size="sm"
+                          className="flex-1"
+                          onClick={() => addToCart(product)}
+                          data-testid={`add-to-cart-${product.id}`}
+                        >
+                          Add to Cart
+                        </Button>
+                      </div>
                     </CardContent>
                   </Card>
                 ))
