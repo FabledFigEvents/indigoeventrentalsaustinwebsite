@@ -286,8 +286,7 @@ export default function Home() {
               <a>
                 <Button
                   size="lg"
-                  variant="outline"
-                  className="px-8 py-4 text-lg border-2 hover:bg-primary hover:text-primary-foreground transition-colors"
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 text-[14px]"
                   data-testid="view-full-catalog-button"
                 >
                   View Full Product Catalog
