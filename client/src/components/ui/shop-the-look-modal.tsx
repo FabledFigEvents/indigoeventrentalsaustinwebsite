@@ -14,7 +14,7 @@ interface ShopTheLookModalProps {
 }
 
 export function ShopTheLookModal({ isOpen, onClose, lookbookItem, products }: ShopTheLookModalProps) {
-  const { addItem } = useCartHelpers();
+  const { addItem, openCart } = useCartHelpers();
   const [quantities, setQuantities] = useState<Record<string, number>>({});
 
   if (!isOpen || !lookbookItem) return null;
@@ -38,9 +38,9 @@ export function ShopTheLookModal({ isOpen, onClose, lookbookItem, products }: Sh
     }
   };
 
-  const addAllToCart = () => {
-    lookProducts.forEach(product => addToCart(product));
+  const viewCart = () => {
     onClose();
+    openCart();
   };
 
   return (
@@ -132,11 +132,11 @@ export function ShopTheLookModal({ isOpen, onClose, lookbookItem, products }: Sh
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 pt-4 border-t border-border">
                 <Button
-                  onClick={addAllToCart}
+                  onClick={viewCart}
                   className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90"
-                  data-testid="add-all-to-cart-button"
+                  data-testid="view-cart-button"
                 >
-                  Add All to Cart
+                  View Cart
                 </Button>
                 <Button
                   variant="outline"
