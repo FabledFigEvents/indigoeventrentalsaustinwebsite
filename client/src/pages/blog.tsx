@@ -4,8 +4,11 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Link } from 'wouter';
 import { Footer } from '@/components/ui/footer';
+import { useState } from 'react';
 
 export default function Blog() {
+  const [selectedCategory, setSelectedCategory] = useState('All Posts');
+  
   const blogPosts = [
     {
       id: 1,
@@ -87,6 +90,15 @@ export default function Blog() {
     });
   };
 
+  // Filter posts based on selected category
+  const filteredPosts = selectedCategory === 'All Posts' 
+    ? blogPosts 
+    : blogPosts.filter(post => post.category === selectedCategory);
+
+  // Get the featured post (always first post unless filtered)
+  const featuredPost = filteredPosts[0] || blogPosts[0];
+  const gridPosts = filteredPosts.length > 1 ? filteredPosts.slice(1) : [];
+
   return (
     <main className="pt-20">
       {/* Header */}
@@ -108,8 +120,9 @@ export default function Blog() {
             {categories.map((category) => (
               <Button
                 key={category}
-                variant={category === 'All Posts' ? 'default' : 'outline'}
+                variant={selectedCategory === category ? 'default' : 'outline'}
                 className="px-6 py-2 rounded-full"
+                onClick={() => setSelectedCategory(category)}
                 data-testid={`category-filter-${category.toLowerCase().replace(/\s+/g, '-')}`}
               >
                 {category}
@@ -128,40 +141,40 @@ export default function Blog() {
                 Featured
               </Badge>
               <Badge variant="outline">
-                {blogPosts[0].category}
+                {featuredPost.category}
               </Badge>
             </div>
             
             <Card className="overflow-hidden hover:shadow-lg transition-shadow">
               <div className="grid grid-cols-1 lg:grid-cols-2">
                 <img
-                  src={blogPosts[0].image}
-                  alt={blogPosts[0].title}
+                  src={featuredPost.image}
+                  alt={featuredPost.title}
                   className="w-full h-64 lg:h-full object-cover"
                 />
                 <CardContent className="p-8 flex flex-col justify-center">
                   <h2 className="text-3xl font-serif font-bold mb-4">
-                    {blogPosts[0].title}
+                    {featuredPost.title}
                   </h2>
                   <p className="text-muted-foreground mb-6 leading-relaxed">
-                    {blogPosts[0].excerpt}
+                    {featuredPost.excerpt}
                   </p>
                   
                   <div className="flex items-center gap-4 text-sm text-muted-foreground mb-6">
                     <div className="flex items-center gap-2">
                       <User className="h-4 w-4" />
-                      {blogPosts[0].author}
+                      {featuredPost.author}
                     </div>
                     <div className="flex items-center gap-2">
                       <Calendar className="h-4 w-4" />
-                      {formatDate(blogPosts[0].date)}
+                      {formatDate(featuredPost.date)}
                     </div>
-                    <span>{blogPosts[0].readTime}</span>
+                    <span>{featuredPost.readTime}</span>
                   </div>
 
                   <Button 
                     className="self-start bg-primary text-primary-foreground hover:bg-primary/90"
-                    data-testid={`read-post-${blogPosts[0].id}`}
+                    data-testid={`read-post-${featuredPost.id}`}
                   >
                     Read Full Article
                     <ArrowRight className="h-4 w-4 ml-2" />
@@ -179,7 +192,7 @@ export default function Blog() {
           <h2 className="text-3xl font-serif font-bold text-center mb-12">Latest Articles</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.slice(1).map((post) => (
+            {gridPosts.length > 0 ? gridPosts.map((post) => (
               <Card key={post.id} className="overflow-hidden hover:shadow-lg transition-shadow">
                 <img
                   src={post.image}
@@ -226,7 +239,13 @@ export default function Blog() {
                   </Button>
                 </CardContent>
               </Card>
-            ))}
+            )) : (
+              <div className="col-span-full text-center py-12">
+                <p className="text-muted-foreground text-lg">
+                  No articles found for "{selectedCategory}". Try selecting a different category.
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </section>
