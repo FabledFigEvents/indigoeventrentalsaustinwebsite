@@ -80,7 +80,6 @@ export default function Lookbook() {
           </div>
         </div>
       </section>
-
       {/* Lookbook Gallery */}
       <section className="pt-8 pb-20">
         <div className="container mx-auto px-4">
@@ -148,7 +147,6 @@ export default function Lookbook() {
           )}
         </div>
       </section>
-
       {/* Inspiration CTA */}
       <section className="py-20 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
@@ -163,9 +161,7 @@ export default function Lookbook() {
               size="lg"
               className="bg-accent text-accent-foreground hover:bg-accent/90 px-8 py-4 text-lg"
               data-testid="custom-consultation-button"
-            >
-              Book Custom Consultation
-            </Button>
+            >Book Your Style Consultation</Button>
             <Button
               variant="outline"
               size="lg"
@@ -178,7 +174,6 @@ export default function Lookbook() {
         </div>
       </section>
       <Footer />
-
       {/* Shop the Look Modal */}
       <ProductSelectionModal
         isOpen={isModalOpen}
