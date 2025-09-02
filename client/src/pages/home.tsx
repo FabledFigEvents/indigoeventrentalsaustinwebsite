@@ -151,7 +151,7 @@ export default function Home() {
               <a>
                 <Button
                   size="lg"
-                  className="bg-primary text-primary-foreground hover:bg-white hover:text-primary transition-colors duration-300 px-8 py-4 text-lg"
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 text-lg"
                   data-testid="browse-collections-button"
                 >
                   Browse Collections
@@ -162,8 +162,7 @@ export default function Home() {
               <a>
                 <Button
                   size="lg"
-                  variant="outline"
-                  className="border-2 border-white text-white hover:bg-white hover:text-primary transition-colors duration-300 px-8 py-4 text-lg bg-transparent"
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 text-lg"
                   data-testid="get-quote-button"
                 >
                   Start a Quote
@@ -286,8 +285,7 @@ export default function Home() {
               <a>
                 <Button
                   size="lg"
-                  variant="outline"
-                  className="px-8 py-4 text-lg border-2 hover:bg-primary hover:text-primary-foreground transition-colors"
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 text-lg"
                   data-testid="view-full-catalog-button"
                 >
                   View Full Product Catalog

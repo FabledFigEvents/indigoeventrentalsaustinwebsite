@@ -16,7 +16,7 @@ export function EventCurationCTA() {
             <a>
               <Button
                 size="lg"
-                className="bg-accent text-accent-foreground hover:bg-accent/90 px-8 py-4 text-lg"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 text-lg"
                 data-testid="custom-consultation-button"
               >
                 Book Custom Consultation
@@ -26,9 +26,8 @@ export function EventCurationCTA() {
           <Link href="/collections">
             <a>
               <Button
-                variant="outline"
                 size="lg"
-                className="border-2 border-primary-foreground text-primary hover:bg-primary-foreground hover:text-primary px-8 py-4 text-lg"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 text-lg"
                 data-testid="browse-collections-button"
               >
                 Browse Collections
