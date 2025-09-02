@@ -72,35 +72,18 @@ export default function Catalog() {
           </div>
 
           {/* Filters */}
-          <div className="space-y-6 mb-6">
-            {/* All Pieces Filter */}
-            <div className="flex justify-center">
+          <div className="flex flex-wrap justify-center gap-4 mb-6">
+            {categories.map((category) => (
               <Button
-                variant={selectedCategory === 'all' ? 'default' : 'outline'}
-                onClick={() => setSelectedCategory('all')}
-                className="px-8 py-3 rounded-full text-lg"
-                data-testid="category-filter-all"
+                key={category}
+                variant={selectedCategory === category ? 'default' : 'outline'}
+                onClick={() => setSelectedCategory(category)}
+                className="px-6 py-2 rounded-full"
+                data-testid={`category-filter-${category}`}
               >
-                <Filter className="h-4 w-4 mr-2" />
-                All Pieces
+                {getCategoryLabel(category)}
               </Button>
-            </div>
-            
-            {/* Category Filters */}
-            <div className="flex flex-wrap justify-center gap-4">
-              {categories.slice(1).map((category) => (
-                <Button
-                  key={category}
-                  variant={selectedCategory === category ? 'default' : 'outline'}
-                  onClick={() => setSelectedCategory(category)}
-                  className="px-6 py-2 rounded-full"
-                  data-testid={`category-filter-${category}`}
-                >
-                  <Filter className="h-4 w-4 mr-2" />
-                  {getCategoryLabel(category)}
-                </Button>
-              ))}
-            </div>
+            ))}
           </div>
         </div>
       </section>
