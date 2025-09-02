@@ -30,7 +30,7 @@ export default function Catalog() {
       tables: 'Tables',
       linens: 'Linens',
       tableware: 'Table Settings',
-      decor: 'Decor',
+      decor: 'Décor',
       lighting: 'Lighting',
       audio: 'Electronics',
       flooring: 'Dance Floors',
