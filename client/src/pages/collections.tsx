@@ -12,6 +12,7 @@ export default function Collections() {
   const { addItem } = useCartHelpers();
   const [selectedCollection, setSelectedCollection] = useState<Collection | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isIndividualMode, setIsIndividualMode] = useState(false);
 
   const { data: collections = [] } = useQuery<Collection[]>({
     queryKey: ['/api/collections'],
@@ -28,11 +29,19 @@ export default function Collections() {
 
   const openCollectionModal = (collection: Collection) => {
     setSelectedCollection(collection);
+    setIsIndividualMode(false);
+    setIsModalOpen(true);
+  };
+
+  const openIndividualProductsModal = (collection: Collection) => {
+    setSelectedCollection(collection);
+    setIsIndividualMode(true);
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
     setSelectedCollection(null);
+    setIsIndividualMode(false);
     setIsModalOpen(false);
   };
 
@@ -125,6 +134,7 @@ export default function Collections() {
                       <Button
                         variant="ghost"
                         className="w-full text-primary hover:text-primary/80"
+                        onClick={() => openIndividualProductsModal(collection)}
                         data-testid={`view-products-${collection.id}`}
                       >
                         View Individual Products
@@ -197,12 +207,13 @@ export default function Collections() {
       <ProductSelectionModal
         isOpen={isModalOpen}
         onClose={closeModal}
-        title={selectedCollection?.name || ""}
-        description={selectedCollection?.description}
+        title={isIndividualMode ? `${selectedCollection?.name || ""} - Individual Products` : selectedCollection?.name || ""}
+        description={isIndividualMode ? "Browse and add individual items from this collection" : selectedCollection?.description}
         collection={selectedCollection}
         products={products}
         guestCount={50}
-        showGuestCountInput={true}
+        showGuestCountInput={!isIndividualMode}
+        individualProductMode={isIndividualMode}
       />
     </main>
   );

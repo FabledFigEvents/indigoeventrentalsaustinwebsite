@@ -15,6 +15,7 @@ interface ProductSelectionModalProps {
   products: Product[];
   guestCount?: number;
   showGuestCountInput?: boolean;
+  individualProductMode?: boolean;
 }
 
 export function ProductSelectionModal({ 
@@ -26,7 +27,8 @@ export function ProductSelectionModal({
   collection,
   products, 
   guestCount: initialGuestCount = 50,
-  showGuestCountInput = false
+  showGuestCountInput = false,
+  individualProductMode = false
 }: ProductSelectionModalProps) {
   const { addItem, openCart } = useCartHelpers();
   const [quantities, setQuantities] = useState<Record<string, number>>({});
@@ -41,8 +43,12 @@ export function ProductSelectionModal({
     ? products.filter(p => collection.products?.includes(p.id))
     : [];
 
-  // Calculate suggested quantities based on guest count
+  // Calculate suggested quantities based on guest count or default to 1 for individual product mode
   const getSuggestedQuantity = (productId: string): number => {
+    if (individualProductMode) {
+      return quantities[productId] !== undefined ? quantities[productId] : 1;
+    }
+    
     if (!showGuestCountInput || !collection) {
       return quantities[productId] || 1;
     }
