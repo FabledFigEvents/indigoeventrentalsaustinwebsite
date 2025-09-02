@@ -7,12 +7,15 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
+import { ProductSelectionModal } from '@/components/ui/product-selection-modal';
 import { Sparkles, Star, Users, ArrowRight, Phone, Mail, MapPin, Plus, Minus } from 'lucide-react';
 
 export default function Home() {
   const { addItem } = useCartHelpers();
   const [selectedVibe, setSelectedVibe] = useState<string>('professional');
   const [quantities, setQuantities] = useState<Record<string, number>>({});
+  const [selectedCollection, setSelectedCollection] = useState<Collection | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { data: products = [] } = useQuery<Product[]>({
     queryKey: ['/api/products'],
@@ -44,6 +47,16 @@ export default function Home() {
     for (let i = 0; i < quantity; i++) {
       addItem(product);
     }
+  };
+
+  const openCollectionModal = (collection: Collection) => {
+    setSelectedCollection(collection);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedCollection(null);
+    setIsModalOpen(false);
   };
 
   return (
@@ -231,15 +244,15 @@ export default function Home() {
                 <CardContent className="p-6">
                   <h3 className="text-2xl font-serif font-bold mb-2">{collection.name}</h3>
                   <p className="text-muted-foreground mb-4">{collection.description}</p>
-                  <Link href={`/collections`}>
-                    <a
-                      className="text-primary font-medium hover:underline inline-flex items-center"
-                      data-testid={`view-collection-${collection.id}`}
-                    >
-                      Style My Event With This Look
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </a>
-                  </Link>
+                  <Button
+                    variant="ghost"
+                    className="text-primary font-medium hover:text-primary/80 inline-flex items-center p-0 h-auto"
+                    onClick={() => openCollectionModal(collection)}
+                    data-testid={`view-collection-${collection.id}`}
+                  >
+                    Style My Event With This Look
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
                 </CardContent>
               </Card>
             ))}
@@ -421,6 +434,18 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* Product Selection Modal */}
+      <ProductSelectionModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        title={selectedCollection?.name || ""}
+        description={selectedCollection?.description}
+        collection={selectedCollection}
+        products={products}
+        guestCount={50}
+        showGuestCountInput={true}
+      />
     </main>
   );
 }
