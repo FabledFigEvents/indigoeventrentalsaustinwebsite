@@ -1,4 +1,4 @@
-import { X, Minus, Plus, Trash2, Users, MapPin, Lightbulb, AlertCircle } from 'lucide-react';
+import { X, Minus, Plus, Trash2, Users, MapPin } from 'lucide-react';
 import { useCartHelpers } from '@/lib/cart-context';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -6,7 +6,6 @@ import { Separator } from '@/components/ui/separator';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Badge } from '@/components/ui/badge';
 import { useQuery } from '@tanstack/react-query';
 import { Product } from '@shared/schema';
 import { Link } from 'wouter';
@@ -28,8 +27,6 @@ export function CartModal() {
     calculateDeliveryFee,
     calculateSetupFee,
     getQuoteTotal,
-    getSuggestedQuantity,
-    getMissingRecommendations,
     addItem,
   } = useCartHelpers();
 
@@ -44,7 +41,6 @@ export function CartModal() {
   const setupFee = calculateSetupFee();
   const damageWaiverFee = includeDamageWaiver ? 25 : 0;
   const total = getQuoteTotal();
-  const missingCategories = getMissingRecommendations();
 
   return (
     <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={closeCart}>
@@ -114,104 +110,55 @@ export function CartModal() {
             </div>
           ) : (
             <>
-              {/* Missing Recommendations */}
-              {missingCategories.length > 0 && (
-                <div className="mb-6 p-4 bg-accent/10 rounded-lg border border-accent/20">
-                  <div className="flex items-center mb-3">
-                    <Lightbulb className="h-5 w-5 text-accent mr-2" />
-                    <h4 className="font-medium">Smart Recommendations</h4>
-                  </div>
-                  <p className="text-sm text-muted-foreground mb-3">
-                    Complete your event setup with these essentials:
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {missingCategories.map((category) => (
-                      <Badge key={category} variant="outline" className="border-accent text-accent">
-                        {category.charAt(0).toUpperCase() + category.slice(1)} needed
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-              )}
-
               {/* Cart Items */}
               <div className="space-y-4 mb-6" data-testid="cart-items">
-                {items.map((item) => {
-                  const suggestedQty = getSuggestedQuantity(item.product);
-                  const needsMoreItems = item.quantity < suggestedQty;
-                  
-                  return (
-                    <div key={item.product.id} className="flex items-center space-x-4 p-4 border border-border rounded-lg">
-                      <img
-                        src={item.product.imageUrl}
-                        alt={item.product.name}
-                        className="w-16 h-16 object-cover rounded-md"
-                      />
-                      <div className="flex-1">
-                        <div className="flex items-center space-x-2 mb-1">
-                          <h4 className="font-medium">{item.product.name}</h4>
-                          {needsMoreItems && (
-                            <Badge variant="outline" className="text-xs">
-                              <AlertCircle className="h-3 w-3 mr-1" />
-                              Suggest {suggestedQty}
-                            </Badge>
-                          )}
-                        </div>
-                        <p className="text-sm text-muted-foreground">${item.product.price} each</p>
-                        {needsMoreItems && (
-                          <p className="text-xs text-accent">
-                            For {guestCount} guests, we recommend {suggestedQty} {item.product.category}
-                          </p>
-                        )}
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
-                          data-testid={`decrease-quantity-${item.product.id}`}
-                        >
-                          <Minus className="h-3 w-3" />
-                        </Button>
-                        <span className="w-8 text-center" data-testid={`quantity-${item.product.id}`}>
-                          {item.quantity}
-                        </span>
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
-                          data-testid={`increase-quantity-${item.product.id}`}
-                        >
-                          <Plus className="h-3 w-3" />
-                        </Button>
-                        {needsMoreItems && (
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => updateQuantity(item.product.id, suggestedQty)}
-                            className="text-accent hover:text-accent/80"
-                            data-testid={`use-suggested-${item.product.id}`}
-                          >
-                            Use {suggestedQty}
-                          </Button>
-                        )}
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => removeItem(item.product.id)}
-                          data-testid={`remove-item-${item.product.id}`}
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
-                      </div>
-                      <div className="text-right">
-                        <p className="font-medium" data-testid={`item-total-${item.product.id}`}>
-                          ${(parseFloat(item.product.price) * item.quantity).toFixed(2)}
-                        </p>
-                      </div>
+                {items.map((item) => (
+                  <div key={item.product.id} className="flex items-center space-x-4 p-4 border border-border rounded-lg">
+                    <img
+                      src={item.product.imageUrl}
+                      alt={item.product.name}
+                      className="w-16 h-16 object-cover rounded-md"
+                    />
+                    <div className="flex-1">
+                      <h4 className="font-medium mb-1">{item.product.name}</h4>
+                      <p className="text-sm text-muted-foreground">${item.product.price} each</p>
                     </div>
-                  );
-                })}
+                    <div className="flex items-center space-x-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
+                        data-testid={`decrease-quantity-${item.product.id}`}
+                      >
+                        <Minus className="h-3 w-3" />
+                      </Button>
+                      <span className="w-8 text-center" data-testid={`quantity-${item.product.id}`}>
+                        {item.quantity}
+                      </span>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
+                        data-testid={`increase-quantity-${item.product.id}`}
+                      >
+                        <Plus className="h-3 w-3" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => removeItem(item.product.id)}
+                        data-testid={`remove-item-${item.product.id}`}
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-medium" data-testid={`item-total-${item.product.id}`}>
+                        ${(parseFloat(item.product.price) * item.quantity).toFixed(2)}
+                      </p>
+                    </div>
+                  </div>
+                ))}
               </div>
 
               <Separator className="my-6" />
