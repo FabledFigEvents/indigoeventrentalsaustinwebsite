@@ -447,33 +447,6 @@ export default function Home() {
           }`}
           onClick={closeLookImageModal}
         >
-          {/* Top Right Buttons */}
-          <div className="absolute top-6 right-6 z-10 flex gap-2">
-            {/* Shop the Look Button */}
-            <Button
-              className="bg-accent text-accent-foreground hover:bg-accent/90 transition-colors"
-              onClick={(e) => {
-                e.stopPropagation();
-                openShopLookModal(selectedLookImage);
-              }}
-              data-testid={`shop-look-modal-${selectedLookImage.id}`}
-            >
-              <ShoppingBag className="h-4 w-4 mr-2" />
-              Shop the Look
-            </Button>
-            
-            {/* Close Button */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="text-white hover:bg-white/20 transition-colors"
-              onClick={closeLookImageModal}
-              data-testid="close-look-modal-button"
-            >
-              <X className="h-6 w-6" />
-            </Button>
-          </div>
-
           {/* Image Container */}
           <div 
             className={`relative max-w-[90vw] max-h-[90vh] transition-all duration-500 ease-out ${
@@ -481,6 +454,33 @@ export default function Home() {
             }`}
             onClick={(e) => e.stopPropagation()}
           >
+            {/* Top Right Buttons */}
+            <div className="absolute top-4 right-4 z-10 flex gap-2">
+              {/* Shop the Look Button */}
+              <Button
+                className="bg-accent text-accent-foreground hover:bg-accent/90 transition-colors"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  openShopLookModal(selectedLookImage);
+                }}
+                data-testid={`shop-look-modal-${selectedLookImage.id}`}
+              >
+                <ShoppingBag className="h-4 w-4 mr-2" />
+                Shop the Look
+              </Button>
+              
+              {/* Close Button */}
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-white hover:bg-white/20 transition-colors"
+                onClick={closeLookImageModal}
+                data-testid="close-look-modal-button"
+              >
+                <X className="h-6 w-6" />
+              </Button>
+            </div>
+
             <img
               src={selectedLookImage.src}
               alt={selectedLookImage.alt}
