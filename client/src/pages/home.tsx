@@ -402,7 +402,7 @@ export default function Home() {
               <a>
                 <Button
                   size="lg"
-                  className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 text-lg"
+                  className="bg-accent text-accent-foreground hover:bg-accent/90 px-8 py-4 text-lg"
                   data-testid="book-consultation-button"
                 >
                   Book Your Style Consultation
