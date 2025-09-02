@@ -8,7 +8,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { ProductSelectionModal } from '@/components/ui/product-selection-modal';
-import { Sparkles, Star, Users, ArrowRight, Phone, Mail, MapPin, Plus, Minus } from 'lucide-react';
+import { Sparkles, Star, Users, ArrowRight, Phone, Mail, MapPin, Plus, Minus, X } from 'lucide-react';
 
 export default function Home() {
   const { addItem } = useCartHelpers();
@@ -16,6 +16,8 @@ export default function Home() {
   const [quantities, setQuantities] = useState<Record<string, number>>({});
   const [selectedCollection, setSelectedCollection] = useState<Collection | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedLookImage, setSelectedLookImage] = useState<any>(null);
+  const [isLookImageModalOpen, setIsLookImageModalOpen] = useState(false);
 
   const { data: products = [] } = useQuery<Product[]>({
     queryKey: ['/api/products'],
@@ -33,6 +35,37 @@ export default function Home() {
   const vibes = ['professional', 'romantic', 'chic', 'playful', 'luxe'];
 
   const featuredCollections = collections.slice(0, 3);
+
+  const realIndigoLooks = [
+    {
+      id: 1,
+      src: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=800",
+      alt: "Elegant table setting with floral arrangements",
+      title: "Garden Romance Wedding",
+      description: "A dreamy outdoor ceremony featuring our vintage gold Chiavari chairs and lush botanical centerpieces. The bride chose soft blush linens that perfectly complemented the natural garden setting, creating an intimate atmosphere for 120 guests."
+    },
+    {
+      id: 2,
+      src: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=800",
+      alt: "Sparkling celebration with confetti and lights",
+      title: "Corporate Gala Night",
+      description: "A sophisticated corporate event that transformed a downtown venue into a luxurious celebration space. Our crystal chandeliers and modern lounge furniture created the perfect backdrop for networking and entertainment for 200 professionals."
+    },
+    {
+      id: 3,
+      src: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=800",
+      alt: "Colorful balloon arrangement for celebration",
+      title: "Birthday Celebration",
+      description: "A vibrant and playful birthday party setup featuring our colorful accent pieces and whimsical decor. The client wanted a fun, Instagram-worthy celebration that would delight guests of all ages - mission accomplished with 80 happy party-goers!"
+    },
+    {
+      id: 4,
+      src: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=800",
+      alt: "Elegant jewelry and accessories detail",
+      title: "Luxury Bridal Shower",
+      description: "An intimate bridal shower showcasing our attention to detail and luxury styling. From the delicate table settings to the sophisticated floral arrangements, every element was curated to create a memorable experience for the bride-to-be and her closest friends."
+    }
+  ];
 
   const getQuantity = (productId: string) => quantities[productId] || 1;
 
@@ -57,6 +90,16 @@ export default function Home() {
   const closeModal = () => {
     setSelectedCollection(null);
     setIsModalOpen(false);
+  };
+
+  const openLookImageModal = (lookImage: any) => {
+    setSelectedLookImage(lookImage);
+    setIsLookImageModalOpen(true);
+  };
+
+  const closeLookImageModal = () => {
+    setSelectedLookImage(null);
+    setIsLookImageModalOpen(false);
   };
 
   return (
@@ -285,41 +328,24 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            <div className="relative overflow-hidden rounded-lg aspect-square group cursor-pointer">
-              <img
-                src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400"
-                alt="Elegant table setting with floral arrangements"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </div>
-
-            <div className="relative overflow-hidden rounded-lg aspect-square group cursor-pointer">
-              <img
-                src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400"
-                alt="Sparkling celebration with confetti and lights"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </div>
-
-            <div className="relative overflow-hidden rounded-lg aspect-square group cursor-pointer">
-              <img
-                src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400"
-                alt="Colorful balloon arrangement for celebration"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </div>
-
-            <div className="relative overflow-hidden rounded-lg aspect-square group cursor-pointer">
-              <img
-                src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400"
-                alt="Elegant jewelry and accessories detail"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </div>
+            {realIndigoLooks.map((lookImage) => (
+              <div 
+                key={lookImage.id}
+                className="relative overflow-hidden rounded-lg aspect-square group cursor-pointer"
+                onClick={() => openLookImageModal(lookImage)}
+                data-testid={`look-image-${lookImage.id}`}
+              >
+                <img
+                  src={lookImage.src.replace('w=800&h=800', 'w=400&h=400')}
+                  alt={lookImage.alt}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <p className="text-white text-sm font-medium">{lookImage.title}</p>
+                </div>
+              </div>
+            ))}
           </div>
 
           <div className="text-center">
@@ -446,6 +472,44 @@ export default function Home() {
         guestCount={50}
         showGuestCountInput={true}
       />
+
+      {/* Real Indigo Looks Image Modal */}
+      {isLookImageModalOpen && selectedLookImage && (
+        <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4" onClick={closeLookImageModal}>
+          <div 
+            className="bg-card text-card-foreground max-w-4xl w-full max-h-[90vh] overflow-y-auto rounded-lg"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="relative">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="absolute right-4 top-4 z-10 bg-background/80 backdrop-blur-sm"
+                onClick={closeLookImageModal}
+                data-testid="close-look-modal-button"
+              >
+                <X className="h-4 w-4" />
+              </Button>
+              
+              <img
+                src={selectedLookImage.src}
+                alt={selectedLookImage.alt}
+                className="w-full h-auto max-h-[60vh] object-contain"
+                data-testid={`large-look-image-${selectedLookImage.id}`}
+              />
+            </div>
+            
+            <div className="p-8">
+              <h3 className="text-3xl font-serif font-bold mb-4" data-testid={`look-title-${selectedLookImage.id}`}>
+                {selectedLookImage.title}
+              </h3>
+              <p className="text-muted-foreground text-lg leading-relaxed" data-testid={`look-description-${selectedLookImage.id}`}>
+                {selectedLookImage.description}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
