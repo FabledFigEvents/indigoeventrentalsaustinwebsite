@@ -54,7 +54,7 @@ export default function Home() {
               <a>
                 <Button
                   size="lg"
-                  className="bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg hover:scale-105 transition-all duration-300 px-8 py-4 text-lg"
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 text-lg"
                   data-testid="browse-collections-button"
                 >
                   Browse Collections
@@ -65,7 +65,7 @@ export default function Home() {
               <a>
                 <Button
                   size="lg"
-                  className="bg-white text-primary border-2 border-white hover:bg-primary hover:text-white hover:shadow-lg hover:scale-105 transition-all duration-300 px-8 py-4 text-lg"
+                  className="bg-white text-primary border-2 border-white hover:bg-white/90 hover:text-primary px-8 py-4 text-lg"
                   data-testid="get-quote-button"
                 >
                   Get a Quote
