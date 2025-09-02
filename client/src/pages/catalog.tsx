@@ -5,11 +5,13 @@ import { useCartHelpers } from '@/lib/cart-context';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Plus, Filter } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Plus, Filter, Minus } from 'lucide-react';
 
 export default function Catalog() {
   const { addItem } = useCartHelpers();
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [quantities, setQuantities] = useState<Record<string, number>>({});
 
   const { data: products = [] } = useQuery<Product[]>({
     queryKey: ['/api/products'],
@@ -40,6 +42,21 @@ export default function Catalog() {
 
   const getProductsByCategory = (products: Product[], category: string) => {
     return products.filter(product => product.category === category);
+  };
+
+  const getQuantity = (productId: string) => quantities[productId] || 1;
+
+  const updateQuantity = (productId: string, newQuantity: number) => {
+    if (newQuantity >= 1) {
+      setQuantities(prev => ({ ...prev, [productId]: newQuantity }));
+    }
+  };
+
+  const addToCart = (product: Product) => {
+    const quantity = getQuantity(product.id);
+    for (let i = 0; i < quantity; i++) {
+      addItem(product);
+    }
   };
 
   return (
@@ -121,14 +138,6 @@ export default function Catalog() {
                               alt={product.name}
                               className="w-full h-64 object-cover"
                             />
-                            <Button
-                              size="sm"
-                              className="absolute top-4 right-4 bg-white/90 text-primary hover:bg-white rounded-full p-2"
-                              onClick={() => addItem(product)}
-                              data-testid={`add-to-cart-${product.id}`}
-                            >
-                              <Plus className="h-4 w-4" />
-                            </Button>
                             {product.vibe && product.vibe.length > 0 && (
                               <div className="absolute bottom-4 left-4">
                                 <Badge variant="secondary" className="bg-black/50 text-white">
@@ -147,7 +156,7 @@ export default function Catalog() {
                                 {product.styleNotes}
                               </p>
                             )}
-                            <div className="flex justify-between items-center">
+                            <div className="flex justify-between items-center mb-4">
                               <span className="font-medium text-lg" data-testid={`price-${product.id}`}>
                                 ${product.price} each
                               </span>
@@ -158,6 +167,46 @@ export default function Catalog() {
                                 data-testid={`view-details-${product.id}`}
                               >
                                 View Details
+                              </Button>
+                            </div>
+                            
+                            {/* Quantity Controls */}
+                            <div className="flex items-center gap-3">
+                              <div className="flex items-center border rounded-md">
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  className="h-8 w-8 p-0"
+                                  onClick={() => updateQuantity(product.id, getQuantity(product.id) - 1)}
+                                  data-testid={`decrease-quantity-${product.id}`}
+                                >
+                                  <Minus className="h-3 w-3" />
+                                </Button>
+                                <Input
+                                  type="number"
+                                  min="1"
+                                  value={getQuantity(product.id)}
+                                  onChange={(e) => updateQuantity(product.id, parseInt(e.target.value) || 1)}
+                                  className="h-8 w-12 text-center border-0 text-sm"
+                                  data-testid={`quantity-input-${product.id}`}
+                                />
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  className="h-8 w-8 p-0"
+                                  onClick={() => updateQuantity(product.id, getQuantity(product.id) + 1)}
+                                  data-testid={`increase-quantity-${product.id}`}
+                                >
+                                  <Plus className="h-3 w-3" />
+                                </Button>
+                              </div>
+                              <Button
+                                size="sm"
+                                className="flex-1"
+                                onClick={() => addToCart(product)}
+                                data-testid={`add-to-cart-${product.id}`}
+                              >
+                                Add to Cart
                               </Button>
                             </div>
                           </CardContent>
@@ -183,14 +232,6 @@ export default function Catalog() {
                       alt={product.name}
                       className="w-full h-64 object-cover"
                     />
-                    <Button
-                      size="sm"
-                      className="absolute top-4 right-4 bg-white/90 text-primary hover:bg-white rounded-full p-2"
-                      onClick={() => addItem(product)}
-                      data-testid={`add-to-cart-${product.id}`}
-                    >
-                      <Plus className="h-4 w-4" />
-                    </Button>
                     {product.vibe && product.vibe.length > 0 && (
                       <div className="absolute bottom-4 left-4">
                         <Badge variant="secondary" className="bg-black/50 text-white">
@@ -209,7 +250,7 @@ export default function Catalog() {
                         {product.styleNotes}
                       </p>
                     )}
-                    <div className="flex justify-between items-center">
+                    <div className="flex justify-between items-center mb-4">
                       <span className="font-medium text-lg" data-testid={`price-${product.id}`}>
                         ${product.price} each
                       </span>
@@ -220,6 +261,46 @@ export default function Catalog() {
                         data-testid={`view-details-${product.id}`}
                       >
                         View Details
+                      </Button>
+                    </div>
+                    
+                    {/* Quantity Controls */}
+                    <div className="flex items-center gap-3">
+                      <div className="flex items-center border rounded-md">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="h-8 w-8 p-0"
+                          onClick={() => updateQuantity(product.id, getQuantity(product.id) - 1)}
+                          data-testid={`decrease-quantity-${product.id}`}
+                        >
+                          <Minus className="h-3 w-3" />
+                        </Button>
+                        <Input
+                          type="number"
+                          min="1"
+                          value={getQuantity(product.id)}
+                          onChange={(e) => updateQuantity(product.id, parseInt(e.target.value) || 1)}
+                          className="h-8 w-12 text-center border-0 text-sm"
+                          data-testid={`quantity-input-${product.id}`}
+                        />
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="h-8 w-8 p-0"
+                          onClick={() => updateQuantity(product.id, getQuantity(product.id) + 1)}
+                          data-testid={`increase-quantity-${product.id}`}
+                        >
+                          <Plus className="h-3 w-3" />
+                        </Button>
+                      </div>
+                      <Button
+                        size="sm"
+                        className="flex-1"
+                        onClick={() => addToCart(product)}
+                        data-testid={`add-to-cart-${product.id}`}
+                      >
+                        Add to Cart
                       </Button>
                     </div>
                   </CardContent>
