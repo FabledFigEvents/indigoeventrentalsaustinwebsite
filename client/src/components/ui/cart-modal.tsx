@@ -120,8 +120,7 @@ export function CartModal() {
                 </Link>
                 <Link href="/collections">
                   <Button
-                    variant="outline"
-                    className="border-2 hover:bg-primary hover:text-primary-foreground"
+                    className="bg-primary text-primary-foreground hover:bg-primary/90"
                     onClick={closeCart}
                     data-testid="view-collections-button"
                   >
