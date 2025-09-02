@@ -11,7 +11,7 @@ import { Sparkles, Star, Users, ArrowRight, Phone, Mail, MapPin, Plus, Minus } f
 
 export default function Home() {
   const { addItem } = useCartHelpers();
-  const [selectedVibe, setSelectedVibe] = useState<string>('');
+  const [selectedVibe, setSelectedVibe] = useState<string>('professional');
   const [quantities, setQuantities] = useState<Record<string, number>>({});
 
   const { data: products = [] } = useQuery<Product[]>({
