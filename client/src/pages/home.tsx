@@ -9,6 +9,7 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { ProductSelectionModal } from '@/components/ui/product-selection-modal';
 import { Footer } from '@/components/ui/footer';
+import { EventCurationCTA } from '@/components/ui/event-curation-cta';
 import { Sparkles, Star, Users, ArrowRight, Phone, Mail, MapPin, Plus, Minus, X, ShoppingBag } from 'lucide-react';
 
 export default function Home() {
@@ -388,42 +389,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Call to Action */}
-      <section className="py-20 bg-primary text-primary-foreground">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-5xl font-serif font-bold mb-6">
-            Ready to Curate Your Event Look?
-          </h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Let's schedule your personal styling consultation and bring your vision to life
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact">
-              <a>
-                <Button
-                  size="lg"
-                  className="bg-accent text-accent-foreground hover:bg-accent/90 px-8 py-4 text-lg"
-                  data-testid="book-consultation-button"
-                >
-                  Book Your Style Consultation
-                </Button>
-              </a>
-            </Link>
-            <Link href="/catalog">
-              <a>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="border-2 border-accent-foreground text-primary hover:bg-accent-foreground hover:text-accent px-8 py-4 text-lg"
-                  data-testid="browse-catalog-button"
-                >
-                  Browse the Catalog
-                </Button>
-              </a>
-            </Link>
-          </div>
-        </div>
-      </section>
+      <EventCurationCTA />
 
       <Footer />
 
