@@ -20,16 +20,21 @@ export default function Catalog() {
     enabled: selectedCategory !== 'all',
   });
 
-  const categories = ['all', 'seating', 'tables', 'lighting', 'linens'];
+  const categories = ['all', 'seating', 'tables', 'linens', 'tableware', 'decor', 'lighting', 'audio', 'flooring', 'entertainment'];
   const displayProducts = selectedCategory === 'all' ? products : categoryProducts;
 
   const getCategoryLabel = (category: string) => {
     const labels: Record<string, string> = {
       all: 'All Pieces',
-      seating: 'Seating',
+      seating: 'Chairs & Seating',
       tables: 'Tables',
-      lighting: 'Lighting',
       linens: 'Linens',
+      tableware: 'Table Settings',
+      decor: 'Wedding Decorations',
+      lighting: 'Lighting',
+      audio: 'Speakers & Audio',
+      flooring: 'Dance Floors',
+      entertainment: 'Photo Booths',
     };
     return labels[category] || category;
   };
