@@ -210,46 +210,66 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Services Overview */}
+      {/* Real Indigo Looks */}
       <section className="py-20 bg-muted">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-serif font-bold mb-6">Our Services</h2>
+            <h2 className="text-4xl font-serif font-bold mb-6">Real Indigo Looks</h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              From vision to reality, we handle every detail with the precision of a luxury fashion house
+              See how our clients have styled their signature moments
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="text-center p-8">
-              <div className="w-16 h-16 mx-auto mb-6 bg-primary/10 rounded-full flex items-center justify-center">
-                <Users className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="text-xl font-serif font-bold mb-4">Personal Consultation</h3>
-              <p className="text-muted-foreground">
-                One-on-one styling sessions to understand your vision and create the perfect event aesthetic.
-              </p>
-            </Card>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <div className="relative overflow-hidden rounded-lg aspect-square group cursor-pointer">
+              <img
+                src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400"
+                alt="Elegant table setting with floral arrangements"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
 
-            <Card className="text-center p-8">
-              <div className="w-16 h-16 mx-auto mb-6 bg-primary/10 rounded-full flex items-center justify-center">
-                <Star className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="text-xl font-serif font-bold mb-4">Curated Collections</h3>
-              <p className="text-muted-foreground">
-                Handpicked pieces styled into cohesive collections that tell your unique story.
-              </p>
-            </Card>
+            <div className="relative overflow-hidden rounded-lg aspect-square group cursor-pointer">
+              <img
+                src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400"
+                alt="Sparkling celebration with confetti and lights"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
 
-            <Card className="text-center p-8">
-              <div className="w-16 h-16 mx-auto mb-6 bg-primary/10 rounded-full flex items-center justify-center">
-                <Sparkles className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="text-xl font-serif font-bold mb-4">Complete Setup</h3>
-              <p className="text-muted-foreground">
-                Professional delivery, setup, and breakdown services ensure your event is picture-perfect.
-              </p>
-            </Card>
+            <div className="relative overflow-hidden rounded-lg aspect-square group cursor-pointer">
+              <img
+                src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400"
+                alt="Colorful balloon arrangement for celebration"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
+
+            <div className="relative overflow-hidden rounded-lg aspect-square group cursor-pointer">
+              <img
+                src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400"
+                alt="Elegant jewelry and accessories detail"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
+          </div>
+
+          <div className="text-center">
+            <Link href="/lookbook">
+              <a>
+                <Button
+                  size="lg"
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 text-lg"
+                  data-testid="view-full-lookbook-button"
+                >
+                  View Full Lookbook
+                </Button>
+              </a>
+            </Link>
           </div>
         </div>
       </section>
