@@ -152,8 +152,8 @@ export default function Lookbook() {
       {/* Inspiration CTA */}
       <section className="py-20 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-serif font-bold mb-6">
-            Create Your Own Signature Look
+          <h2 className="text-5xl font-serif font-bold mb-6">
+            Ready to Curate Your Event Look?
           </h2>
           <p className="text-xl opacity-90 mb-8 max-w-2xl mx-auto">
             Inspired by what you see? Our design team can help you create a custom look that's uniquely yours.
