@@ -9,7 +9,7 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { ProductSelectionModal } from '@/components/ui/product-selection-modal';
 import { Footer } from '@/components/ui/footer';
-import { Sparkles, Star, Users, ArrowRight, Phone, Mail, MapPin, Plus, Minus, X } from 'lucide-react';
+import { Sparkles, Star, Users, ArrowRight, Phone, Mail, MapPin, Plus, Minus, X, ShoppingBag } from 'lucide-react';
 
 export default function Home() {
   const { addItem } = useCartHelpers();
@@ -20,6 +20,8 @@ export default function Home() {
   const [selectedLookImage, setSelectedLookImage] = useState<any>(null);
   const [isLookImageModalOpen, setIsLookImageModalOpen] = useState(false);
   const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const [isShopLookModalOpen, setIsShopLookModalOpen] = useState(false);
+  const [selectedLookForShopping, setSelectedLookForShopping] = useState<any>(null);
 
   const { data: products = [] } = useQuery<Product[]>({
     queryKey: ['/api/products'],
@@ -44,28 +46,32 @@ export default function Home() {
       src: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=800",
       alt: "Elegant table setting with floral arrangements",
       title: "Garden Romance Wedding",
-      description: "A dreamy outdoor ceremony featuring our vintage gold Chiavari chairs and lush botanical centerpieces. The bride chose soft blush linens that perfectly complemented the natural garden setting, creating an intimate atmosphere for 120 guests."
+      description: "A dreamy outdoor ceremony featuring our vintage gold Chiavari chairs and lush botanical centerpieces. The bride chose soft blush linens that perfectly complemented the natural garden setting, creating an intimate atmosphere for 120 guests.",
+      products: ["chiavari-chair-gold", "blush-linen-tablecloth", "crystal-centerpiece-vase", "gold-charger-plate"]
     },
     {
       id: 2,
       src: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=800",
       alt: "Sparkling celebration with confetti and lights",
       title: "Corporate Gala Night",
-      description: "A sophisticated corporate event that transformed a downtown venue into a luxurious celebration space. Our crystal chandeliers and modern lounge furniture created the perfect backdrop for networking and entertainment for 200 professionals."
+      description: "A sophisticated corporate event that transformed a downtown venue into a luxurious celebration space. Our crystal chandeliers and modern lounge furniture created the perfect backdrop for networking and entertainment for 200 professionals.",
+      products: ["crystal-chandelier", "modern-lounge-chair", "black-linen-tablecloth", "silver-charger-plate"]
     },
     {
       id: 3,
       src: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=800",
       alt: "Colorful balloon arrangement for celebration",
       title: "Birthday Celebration",
-      description: "A vibrant and playful birthday party setup featuring our colorful accent pieces and whimsical decor. The client wanted a fun, Instagram-worthy celebration that would delight guests of all ages - mission accomplished with 80 happy party-goers!"
+      description: "A vibrant and playful birthday party setup featuring our colorful accent pieces and whimsical decor. The client wanted a fun, Instagram-worthy celebration that would delight guests of all ages - mission accomplished with 80 happy party-goers!",
+      products: ["chiavari-chair-silver", "colorful-accent-pillow", "festive-table-runner", "party-centerpiece"]
     },
     {
       id: 4,
       src: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=800",
       alt: "Elegant jewelry and accessories detail",
       title: "Luxury Bridal Shower",
-      description: "An intimate bridal shower showcasing our attention to detail and luxury styling. From the delicate table settings to the sophisticated floral arrangements, every element was curated to create a memorable experience for the bride-to-be and her closest friends."
+      description: "An intimate bridal shower showcasing our attention to detail and luxury styling. From the delicate table settings to the sophisticated floral arrangements, every element was curated to create a memorable experience for the bride-to-be and her closest friends.",
+      products: ["chiavari-chair-gold", "ivory-linen-tablecloth", "crystal-centerpiece-vase", "rose-gold-charger-plate"]
     }
   ];
 
@@ -106,6 +112,17 @@ export default function Home() {
       setSelectedLookImage(null);
       setIsImageLoaded(false);
     }, 300);
+  };
+
+  const openShopLookModal = (lookImage: any) => {
+    setSelectedLookForShopping(lookImage);
+    setIsShopLookModalOpen(true);
+    closeLookImageModal();
+  };
+
+  const closeShopLookModal = () => {
+    setIsShopLookModalOpen(false);
+    setSelectedLookForShopping(null);
   };
 
   return (
@@ -430,16 +447,32 @@ export default function Home() {
           }`}
           onClick={closeLookImageModal}
         >
-          {/* Close Button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="absolute top-6 right-6 z-10 text-white hover:bg-white/20 transition-colors"
-            onClick={closeLookImageModal}
-            data-testid="close-look-modal-button"
-          >
-            <X className="h-6 w-6" />
-          </Button>
+          {/* Top Right Buttons */}
+          <div className="absolute top-6 right-6 z-10 flex gap-2">
+            {/* Shop the Look Button */}
+            <Button
+              className="bg-accent text-accent-foreground hover:bg-accent/90 transition-colors"
+              onClick={(e) => {
+                e.stopPropagation();
+                openShopLookModal(selectedLookImage);
+              }}
+              data-testid={`shop-look-modal-${selectedLookImage.id}`}
+            >
+              <ShoppingBag className="h-4 w-4 mr-2" />
+              Shop the Look
+            </Button>
+            
+            {/* Close Button */}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-white hover:bg-white/20 transition-colors"
+              onClick={closeLookImageModal}
+              data-testid="close-look-modal-button"
+            >
+              <X className="h-6 w-6" />
+            </Button>
+          </div>
 
           {/* Image Container */}
           <div 
@@ -468,6 +501,17 @@ export default function Home() {
           </div>
         </div>
       )}
+
+      {/* Shop the Look Modal for Real Indigo Looks */}
+      <ProductSelectionModal
+        isOpen={isShopLookModalOpen}
+        onClose={closeShopLookModal}
+        title={selectedLookForShopping?.title || "Shop the Look"}
+        description={selectedLookForShopping?.description || undefined}
+        lookbookItem={selectedLookForShopping}
+        products={products}
+        showGuestCountInput={false}
+      />
     </main>
   );
 }
