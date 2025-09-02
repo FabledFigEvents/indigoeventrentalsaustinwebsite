@@ -167,9 +167,7 @@ export default function Lookbook() {
               size="lg"
               className="border-2 border-primary-foreground text-primary hover:bg-primary-foreground hover:text-primary px-8 py-4 text-lg"
               data-testid="browse-collections-button"
-            >
-              Browse Collections
-            </Button>
+            >Browse the Catalog</Button>
           </div>
         </div>
       </section>
