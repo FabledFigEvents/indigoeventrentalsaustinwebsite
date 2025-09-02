@@ -13,8 +13,9 @@ export function Navigation() {
   const navItems = [
     { href: '/collections', label: 'Designer Collections' },
     { href: '/catalog', label: 'Product Catalog' },
-    { href: '/lookbook', label: 'Lookbook/Gallery' },
-    { href: '/about', label: 'House of Indigo' },
+    { href: '/lookbook', label: 'Lookbook' },
+    { href: '/blog', label: 'Blog' },
+    { href: '/about', label: 'About Indigo' },
   ];
 
   const NavLinks = ({ mobile = false }: { mobile?: boolean }) => (

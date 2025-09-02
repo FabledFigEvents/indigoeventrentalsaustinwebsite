@@ -12,6 +12,7 @@ import Catalog from "@/pages/catalog";
 import Collections from "@/pages/collections";
 import Lookbook from "@/pages/lookbook";
 import About from "@/pages/about";
+import Blog from "@/pages/blog";
 import Contact from "@/pages/contact";
 
 function Router() {
@@ -21,6 +22,7 @@ function Router() {
       <Route path="/catalog" component={Catalog} />
       <Route path="/collections" component={Collections} />
       <Route path="/lookbook" component={Lookbook} />
+      <Route path="/blog" component={Blog} />
       <Route path="/about" component={About} />
       <Route path="/contact" component={Contact} />
       <Route component={NotFound} />
