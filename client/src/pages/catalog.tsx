@@ -129,7 +129,7 @@ export default function Catalog() {
                       {categoryProducts.map((product) => (
                         <Card
                           key={product.id}
-                          className="product-card overflow-hidden shadow-sm hover:shadow-lg transition-shadow"
+                          className="product-card overflow-hidden shadow-sm hover:shadow-lg transition-shadow h-full flex flex-col"
                           data-testid={`product-card-${product.id}`}
                         >
                           <div className="relative overflow-hidden">
@@ -146,7 +146,7 @@ export default function Catalog() {
                               </div>
                             )}
                           </div>
-                          <CardContent className="p-6">
+                          <CardContent className="p-6 flex-1 flex flex-col">
                             <h3 className="font-serif text-xl font-bold mb-2">{product.name}</h3>
                             <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
                               {product.description}
@@ -171,7 +171,7 @@ export default function Catalog() {
                             </div>
                             
                             {/* Quantity Controls */}
-                            <div className="flex items-center gap-3">
+                            <div className="flex items-center gap-3 mt-auto">
                               <div className="flex items-center border rounded-md">
                                 <Button
                                   variant="ghost"
@@ -223,7 +223,7 @@ export default function Catalog() {
               {displayProducts.map((product) => (
                 <Card
                   key={product.id}
-                  className="product-card overflow-hidden shadow-sm hover:shadow-lg transition-shadow"
+                  className="product-card overflow-hidden shadow-sm hover:shadow-lg transition-shadow h-full flex flex-col"
                   data-testid={`product-card-${product.id}`}
                 >
                   <div className="relative overflow-hidden">
@@ -240,7 +240,7 @@ export default function Catalog() {
                       </div>
                     )}
                   </div>
-                  <CardContent className="p-6">
+                  <CardContent className="p-6 flex-1 flex flex-col">
                     <h3 className="font-serif text-xl font-bold mb-2">{product.name}</h3>
                     <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
                       {product.description}
@@ -265,7 +265,7 @@ export default function Catalog() {
                     </div>
                     
                     {/* Quantity Controls */}
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-3 mt-auto">
                       <div className="flex items-center border rounded-md">
                         <Button
                           variant="ghost"
