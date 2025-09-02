@@ -394,7 +394,7 @@ export default function Home() {
               <a>
                 <Button
                   size="lg"
-                  className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 text-lg"
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 text-[14px]"
                   data-testid="view-full-lookbook-button"
                 >
                   View Full Lookbook
