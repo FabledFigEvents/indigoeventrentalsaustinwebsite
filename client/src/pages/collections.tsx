@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Collection, Product } from '@shared/schema';
 import { useCartHelpers } from '@/lib/cart-context';
@@ -5,9 +6,12 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { ArrowRight, Users, Sparkles } from 'lucide-react';
+import { ProductSelectionModal } from '@/components/ui/product-selection-modal';
 
 export default function Collections() {
   const { addItem } = useCartHelpers();
+  const [selectedCollection, setSelectedCollection] = useState<Collection | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { data: collections = [] } = useQuery<Collection[]>({
     queryKey: ['/api/collections'],
@@ -22,23 +26,14 @@ export default function Collections() {
     return products.filter(product => productIds.includes(product.id));
   };
 
-  const addCollectionToCart = (collection: Collection, guestCount: number = 50) => {
-    const collectionProducts = getCollectionProducts(collection.products);
-    collectionProducts.forEach(product => {
-      // Calculate quantity based on guest count and item type
-      let quantity = 1;
-      if (product.category === 'seating') {
-        quantity = Math.ceil(guestCount / 8); // 8 chairs per table approximately
-      } else if (product.category === 'tables') {
-        quantity = Math.ceil(guestCount / 8); // 8 guests per table
-      } else if (product.category === 'linens') {
-        quantity = Math.ceil(guestCount / 8); // One per table
-      }
-      
-      for (let i = 0; i < quantity; i++) {
-        addItem(product);
-      }
-    });
+  const openCollectionModal = (collection: Collection) => {
+    setSelectedCollection(collection);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedCollection(null);
+    setIsModalOpen(false);
   };
 
   return (
@@ -109,24 +104,11 @@ export default function Collections() {
                       </div>
                     </div>
 
-                    {/* Guest Count Input and Add to Cart */}
+                    {/* Style My Event Button */}
                     <div className="space-y-4">
-                      <div className="flex items-center space-x-4">
-                        <Users className="h-5 w-5 text-muted-foreground" />
-                        <span className="text-sm text-muted-foreground">Expected guests:</span>
-                        <input
-                          type="number"
-                          defaultValue="50"
-                          min="1"
-                          max="500"
-                          className="w-20 px-2 py-1 border border-border rounded text-center"
-                          data-testid={`guest-count-${collection.id}`}
-                        />
-                      </div>
-                      
                       <Button
                         className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
-                        onClick={() => addCollectionToCart(collection)}
+                        onClick={() => openCollectionModal(collection)}
                         data-testid={`add-collection-${collection.id}`}
                       >
                         <Sparkles className="h-4 w-4 mr-2" />
@@ -134,7 +116,7 @@ export default function Collections() {
                       </Button>
                       
                       <p className="text-xs text-muted-foreground text-center">
-                        Items will be automatically calculated based on your guest count
+                        Preview quantities and adjust for your guest count
                       </p>
                     </div>
 
@@ -211,6 +193,17 @@ export default function Collections() {
           </div>
         </div>
       </section>
+      {/* Product Selection Modal */}
+      <ProductSelectionModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        title={selectedCollection?.name || ""}
+        description={selectedCollection?.description}
+        collection={selectedCollection}
+        products={products}
+        guestCount={50}
+        showGuestCountInput={true}
+      />
     </main>
   );
 }

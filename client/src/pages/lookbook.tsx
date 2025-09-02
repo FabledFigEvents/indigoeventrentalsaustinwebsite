@@ -5,7 +5,7 @@ import { useCartHelpers } from '@/lib/cart-context';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ShopTheLookModal } from '@/components/ui/shop-the-look-modal';
+import { ProductSelectionModal } from '@/components/ui/product-selection-modal';
 import { ShoppingBag, Filter } from 'lucide-react';
 
 export default function Lookbook() {
@@ -178,11 +178,14 @@ export default function Lookbook() {
       </section>
 
       {/* Shop the Look Modal */}
-      <ShopTheLookModal
+      <ProductSelectionModal
         isOpen={isModalOpen}
         onClose={closeShopModal}
+        title={selectedLookItem?.title || "Shop the Look"}
+        description={selectedLookItem?.description || undefined}
         lookbookItem={selectedLookItem}
         products={products}
+        showGuestCountInput={false}
       />
     </main>
   );
