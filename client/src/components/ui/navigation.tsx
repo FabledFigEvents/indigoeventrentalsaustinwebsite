@@ -79,8 +79,8 @@ export function Navigation() {
                   <Menu className="h-6 w-6" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-[350px] sm:w-[400px] p-0">
-                <div className="flex flex-col h-full">
+              <SheetContent side="right" className="w-[350px] sm:w-[400px] p-0 overflow-hidden">
+                <div className="flex flex-col h-full overflow-hidden">
                   {/* Header */}
                   <div className="p-6 border-b border-border bg-primary text-primary-foreground">
                     <div className="flex items-center justify-between mb-4">
@@ -103,7 +103,7 @@ export function Navigation() {
                   </div>
 
                   {/* Navigation */}
-                  <div className="flex-1 p-6">
+                  <div className="flex-1 overflow-y-auto p-6">
                     <nav className="space-y-2">
                       <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-4">
                         Explore
