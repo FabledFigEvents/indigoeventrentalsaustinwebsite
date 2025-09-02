@@ -475,38 +475,24 @@ export default function Home() {
 
       {/* Real Indigo Looks Image Modal */}
       {isLookImageModalOpen && selectedLookImage && (
-        <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4" onClick={closeLookImageModal}>
-          <div 
-            className="bg-card text-card-foreground max-w-4xl w-full max-h-[90vh] overflow-y-auto rounded-lg"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="relative">
-              <Button
-                variant="ghost"
-                size="icon"
-                className="absolute right-4 top-4 z-10 bg-background/80 backdrop-blur-sm"
-                onClick={closeLookImageModal}
-                data-testid="close-look-modal-button"
-              >
-                <X className="h-4 w-4" />
-              </Button>
-              
-              <img
-                src={selectedLookImage.src}
-                alt={selectedLookImage.alt}
-                className="w-full h-auto max-h-[60vh] object-contain"
-                data-testid={`large-look-image-${selectedLookImage.id}`}
-              />
-            </div>
+        <div className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center" onClick={closeLookImageModal}>
+          <div className="relative max-w-[95vw] max-h-[95vh]" onClick={(e) => e.stopPropagation()}>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="absolute -top-12 right-0 text-white hover:bg-white/20"
+              onClick={closeLookImageModal}
+              data-testid="close-look-modal-button"
+            >
+              <X className="h-6 w-6" />
+            </Button>
             
-            <div className="p-8">
-              <h3 className="text-3xl font-serif font-bold mb-4" data-testid={`look-title-${selectedLookImage.id}`}>
-                {selectedLookImage.title}
-              </h3>
-              <p className="text-muted-foreground text-lg leading-relaxed" data-testid={`look-description-${selectedLookImage.id}`}>
-                {selectedLookImage.description}
-              </p>
-            </div>
+            <img
+              src={selectedLookImage.src}
+              alt={selectedLookImage.alt}
+              className="max-w-full max-h-[95vh] object-contain"
+              data-testid={`large-look-image-${selectedLookImage.id}`}
+            />
           </div>
         </div>
       )}
