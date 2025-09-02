@@ -360,13 +360,13 @@ export class MemStorage implements IStorage {
         vibe: ["romantic", "playful"]
       },
       
-      // PHOTO BOOTHS & ENTERTAINMENT
+      // PHOTO BOOTHS & ENTERTAINMENT (moved to Electronics)
       {
         id: "vintage-photo-booth",
         name: "Vintage Photo Booth",
         description: "Classic photo booth with instant prints for guest memories",
         price: "400.00",
-        category: "entertainment",
+        category: "audio",
         imageUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400",
         styleNotes: "Includes props, backdrop, and attendant",
         vibe: ["playful", "chic"]
@@ -376,7 +376,7 @@ export class MemStorage implements IStorage {
         name: "Custom Hashtag Sign",
         description: "Personalized hashtag sign to encourage social media sharing",
         price: "45.00",
-        category: "entertainment",
+        category: "audio",
         imageUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400",
         styleNotes: "Acrylic or wood with custom design",
         vibe: ["playful", "chic"]
