@@ -11,6 +11,7 @@ interface CartState {
   isOpen: boolean;
   guestCount: number;
   location: string;
+  includeDamageWaiver: boolean;
 }
 
 type CartAction =
@@ -19,6 +20,7 @@ type CartAction =
   | { type: 'UPDATE_QUANTITY'; payload: { id: string; quantity: number } }
   | { type: 'SET_GUEST_COUNT'; payload: number }
   | { type: 'SET_LOCATION'; payload: string }
+  | { type: 'SET_DAMAGE_WAIVER'; payload: boolean }
   | { type: 'CLEAR_CART' }
   | { type: 'TOGGLE_CART' }
   | { type: 'OPEN_CART' }
@@ -28,7 +30,8 @@ const initialState: CartState = {
   items: [],
   isOpen: false,
   guestCount: 50,
-  location: 'Austin, TX',
+  location: '',
+  includeDamageWaiver: false,
 };
 
 function cartReducer(state: CartState, action: CartAction): CartState {
@@ -73,6 +76,11 @@ function cartReducer(state: CartState, action: CartAction): CartState {
       return {
         ...state,
         location: action.payload,
+      };
+    case 'SET_DAMAGE_WAIVER':
+      return {
+        ...state,
+        includeDamageWaiver: action.payload,
       };
     case 'CLEAR_CART':
       return {
@@ -165,6 +173,10 @@ export function useCartHelpers() {
     dispatch({ type: 'SET_LOCATION', payload: location });
   };
 
+  const setDamageWaiver = (include: boolean) => {
+    dispatch({ type: 'SET_DAMAGE_WAIVER', payload: include });
+  };
+
   const getSubtotal = () => {
     return state.items.reduce((total, item) => {
       return total + (parseFloat(item.product.price) * item.quantity);
@@ -192,7 +204,7 @@ export function useCartHelpers() {
     const subtotal = getSubtotal();
     const delivery = calculateDeliveryFee();
     const setup = calculateSetupFee();
-    const damageWaiver = 25;
+    const damageWaiver = state.includeDamageWaiver ? 25 : 0;
     return subtotal + delivery + setup + damageWaiver;
   };
 
@@ -233,11 +245,13 @@ export function useCartHelpers() {
     isOpen: state.isOpen,
     guestCount: state.guestCount,
     location: state.location,
+    includeDamageWaiver: state.includeDamageWaiver,
     addItem,
     removeItem,
     updateQuantity,
     setGuestCount,
     setLocation,
+    setDamageWaiver,
     clearCart,
     toggleCart,
     openCart,

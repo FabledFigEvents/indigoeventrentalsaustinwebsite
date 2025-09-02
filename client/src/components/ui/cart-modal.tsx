@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Badge } from '@/components/ui/badge';
 import { useQuery } from '@tanstack/react-query';
 import { Product } from '@shared/schema';
@@ -16,11 +17,13 @@ export function CartModal() {
     isOpen,
     guestCount,
     location,
+    includeDamageWaiver,
     closeCart,
     updateQuantity,
     removeItem,
     setGuestCount,
     setLocation,
+    setDamageWaiver,
     getSubtotal,
     calculateDeliveryFee,
     calculateSetupFee,
@@ -39,7 +42,7 @@ export function CartModal() {
   const subtotal = getSubtotal();
   const deliveryFee = calculateDeliveryFee();
   const setupFee = calculateSetupFee();
-  const damageWaiverFee = 25;
+  const damageWaiverFee = includeDamageWaiver ? 25 : 0;
   const total = getQuoteTotal();
   const missingCategories = getMissingRecommendations();
 
@@ -94,7 +97,7 @@ export function CartModal() {
                 type="text"
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
-                placeholder="Austin, TX"
+                placeholder="Enter event location (e.g., Austin, TX)"
                 className="w-full"
                 data-testid="location-input"
               />
@@ -243,9 +246,21 @@ export function CartModal() {
                       )}
                     </span>
                   </div>
-                  <div className="flex justify-between text-sm text-muted-foreground">
-                    <span>Damage Waiver (Optional)</span>
-                    <span data-testid="damage-waiver-fee">${damageWaiverFee.toFixed(2)}</span>
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center space-x-2">
+                      <Checkbox
+                        id="damage-waiver"
+                        checked={includeDamageWaiver}
+                        onCheckedChange={setDamageWaiver}
+                        data-testid="damage-waiver-checkbox"
+                      />
+                      <Label htmlFor="damage-waiver" className="text-sm cursor-pointer">
+                        Damage Waiver (Optional)
+                      </Label>
+                    </div>
+                    <span data-testid="damage-waiver-fee" className={includeDamageWaiver ? "" : "text-muted-foreground"}>
+                      ${damageWaiverFee.toFixed(2)}
+                    </span>
                   </div>
                   <Separator />
                   <div className="flex justify-between font-semibold text-lg">
@@ -263,11 +278,7 @@ export function CartModal() {
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Location:</span>
-                      <span className="font-medium">{location}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Categories:</span>
-                      <span className="font-medium">{Array.from(new Set(items.map(item => item.product.category))).length}</span>
+                      <span className="font-medium">{location || 'Not specified'}</span>
                     </div>
                   </div>
                 </div>
