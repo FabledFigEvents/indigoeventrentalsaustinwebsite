@@ -15,7 +15,8 @@ export function EventCurationCTA() {
           <Link href="/contact">
             <a>
               <Button
-                size="action"
+                size="lg"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 text-lg"
                 data-testid="custom-consultation-button"
               >
                 Book Custom Consultation
@@ -25,7 +26,8 @@ export function EventCurationCTA() {
           <Link href="/collections">
             <a>
               <Button
-                size="action"
+                size="lg"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 text-lg"
                 data-testid="browse-collections-button"
               >
                 Browse Collections

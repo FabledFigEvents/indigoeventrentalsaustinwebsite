@@ -270,7 +270,8 @@ export default function About() {
             <Link href="/contact">
               <a>
                 <Button
-                  size="action"
+                  size="lg"
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 text-lg"
                   data-testid="contact-us-button"
                 >
                   Get Started Today

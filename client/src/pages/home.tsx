@@ -150,7 +150,8 @@ export default function Home() {
             <Link href="/collections">
               <a>
                 <Button
-                  size="action"
+                  size="lg"
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 text-lg"
                   data-testid="browse-collections-button"
                 >
                   Browse Collections
@@ -160,7 +161,8 @@ export default function Home() {
             <Link href="/contact">
               <a>
                 <Button
-                  size="action"
+                  size="lg"
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 text-lg"
                   data-testid="get-quote-button"
                 >
                   Start a Quote
@@ -282,7 +284,8 @@ export default function Home() {
             <Link href="/catalog">
               <a>
                 <Button
-                  size="action"
+                  size="lg"
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 text-lg"
                   data-testid="view-full-catalog-button"
                 >
                   View Full Product Catalog
@@ -388,7 +391,8 @@ export default function Home() {
             <Link href="/lookbook">
               <a>
                 <Button
-                  size="action"
+                  size="lg"
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 text-lg"
                   data-testid="view-full-lookbook-button"
                 >
                   View Full Lookbook
