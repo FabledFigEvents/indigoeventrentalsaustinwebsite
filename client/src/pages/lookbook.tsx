@@ -51,7 +51,7 @@ export default function Lookbook() {
   return (
     <main className="pt-20">
       {/* Header */}
-      <section className="py-20 bg-muted">
+      <section className="pt-20 pb-12 bg-muted">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h1 className="text-5xl font-serif font-bold mb-6">The Lookbook</h1>
@@ -61,7 +61,7 @@ export default function Lookbook() {
           </div>
 
           {/* Category Filters */}
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
+          <div className="flex flex-wrap justify-center gap-4 mb-6">
             {categories.map((category) => (
               <Button
                 key={category}
@@ -79,7 +79,7 @@ export default function Lookbook() {
       </section>
 
       {/* Lookbook Gallery */}
-      <section className="py-20">
+      <section className="pt-8 pb-20">
         <div className="container mx-auto px-4">
           {displayItems.length === 0 ? (
             <div className="text-center py-16">

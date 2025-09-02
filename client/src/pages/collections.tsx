@@ -44,7 +44,7 @@ export default function Collections() {
   return (
     <main className="pt-20">
       {/* Header */}
-      <section className="py-20 bg-muted">
+      <section className="pt-20 pb-12 bg-muted">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h1 className="text-5xl font-serif font-bold mb-6">Designer Collections</h1>
@@ -56,7 +56,7 @@ export default function Collections() {
       </section>
 
       {/* Collections Grid */}
-      <section className="py-20">
+      <section className="pt-8 pb-20">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12" data-testid="collections-grid">
             {collections.map((collection) => {
