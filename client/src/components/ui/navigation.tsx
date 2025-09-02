@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'wouter';
-import { Phone, ShoppingCart, Menu, X, MessageCircle } from 'lucide-react';
+import { Phone, ShoppingCart, Menu, X, MessageCircle, Mail, MapPin, Clock, Star, ArrowRight } from 'lucide-react';
 import { useState } from 'react';
 import { useCartHelpers } from '@/lib/cart-context';
 import { Button } from '@/components/ui/button';
@@ -79,20 +79,142 @@ export function Navigation() {
                   <Menu className="h-6 w-6" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-                <nav className="flex flex-col space-y-4 mt-8">
-                  <NavLinks mobile />
-                  <div className="pt-4 border-t border-border">
-                    <a
-                      href="tel:5125188400"
-                      className="flex items-center text-sm text-muted-foreground hover:text-primary transition-colors py-2"
-                      data-testid="mobile-phone-link"
-                    >
-                      <Phone className="h-4 w-4 mr-2" />
-                      (512) 518-8400
-                    </a>
+              <SheetContent side="right" className="w-[350px] sm:w-[400px] p-0">
+                <div className="flex flex-col h-full">
+                  {/* Header */}
+                  <div className="p-6 border-b border-border bg-primary text-primary-foreground">
+                    <div className="flex items-center justify-between mb-4">
+                      <div>
+                        <h1 className="text-2xl font-serif font-bold">INDIGO</h1>
+                        <p className="text-xs opacity-90 tracking-wide">AUSTIN EVENT RENTALS</p>
+                      </div>
+                      <div className="flex items-center space-x-1 text-xs">
+                        <Star className="h-3 w-3 fill-current" />
+                        <Star className="h-3 w-3 fill-current" />
+                        <Star className="h-3 w-3 fill-current" />
+                        <Star className="h-3 w-3 fill-current" />
+                        <Star className="h-3 w-3 fill-current" />
+                        <span className="ml-1 font-medium">4.9/5</span>
+                      </div>
+                    </div>
+                    <p className="text-sm opacity-90">
+                      Curating signature style for Austin's most memorable events
+                    </p>
                   </div>
-                </nav>
+
+                  {/* Navigation */}
+                  <div className="flex-1 p-6">
+                    <nav className="space-y-2">
+                      <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-4">
+                        Explore
+                      </p>
+                      {navItems.map((item) => (
+                        <Link key={item.href} href={item.href}>
+                          <a
+                            className={`flex items-center justify-between p-3 rounded-lg transition-colors group hover:bg-muted ${
+                              location === item.href 
+                                ? 'bg-primary/10 text-primary border border-primary/20' 
+                                : 'text-foreground hover:text-primary'
+                            }`}
+                            onClick={() => setIsOpen(false)}
+                            data-testid={`mobile-nav-link-${item.label.toLowerCase().replace(/\s+/g, '-')}`}
+                          >
+                            <span className="font-medium">{item.label}</span>
+                            <ArrowRight className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+                          </a>
+                        </Link>
+                      ))}
+                    </nav>
+
+                    {/* Quick Actions */}
+                    <div className="mt-8">
+                      <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-4">
+                        Quick Actions
+                      </p>
+                      <div className="space-y-3">
+                        <Link href="/contact">
+                          <a
+                            className="flex items-center p-3 bg-accent text-accent-foreground rounded-lg hover:bg-accent/80 transition-colors"
+                            onClick={() => setIsOpen(false)}
+                          >
+                            <MessageCircle className="h-4 w-4 mr-3" />
+                            <span className="font-medium">Request Quote</span>
+                          </a>
+                        </Link>
+                        <button
+                          onClick={() => {
+                            setIsOpen(false);
+                            toggleCart();
+                          }}
+                          className="w-full flex items-center p-3 border border-border rounded-lg hover:bg-muted transition-colors"
+                        >
+                          <ShoppingCart className="h-4 w-4 mr-3" />
+                          <span className="font-medium">View Cart ({getItemCount()})</span>
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Contact Info */}
+                    <div className="mt-8">
+                      <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-4">
+                        Get in Touch
+                      </p>
+                      <div className="space-y-3">
+                        <a
+                          href="tel:5125188400"
+                          className="flex items-center space-x-3 p-3 rounded-lg hover:bg-muted transition-colors"
+                          data-testid="mobile-phone-link"
+                        >
+                          <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
+                            <Phone className="h-4 w-4 text-primary" />
+                          </div>
+                          <div>
+                            <p className="font-medium text-sm">(512) 518-8400</p>
+                            <p className="text-xs text-muted-foreground">Call for consultation</p>
+                          </div>
+                        </a>
+                        
+                        <a
+                          href="mailto:contact@indigoatx.com"
+                          className="flex items-center space-x-3 p-3 rounded-lg hover:bg-muted transition-colors"
+                          data-testid="mobile-email-link"
+                        >
+                          <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
+                            <Mail className="h-4 w-4 text-primary" />
+                          </div>
+                          <div>
+                            <p className="font-medium text-sm">contact@indigoatx.com</p>
+                            <p className="text-xs text-muted-foreground">Email us anytime</p>
+                          </div>
+                        </a>
+
+                        <div className="flex items-center space-x-3 p-3">
+                          <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
+                            <MapPin className="h-4 w-4 text-primary" />
+                          </div>
+                          <div>
+                            <p className="font-medium text-sm">Austin, TX</p>
+                            <p className="text-xs text-muted-foreground">& surrounding areas</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Footer */}
+                  <div className="p-6 border-t border-border bg-muted/30">
+                    <div className="flex items-center space-x-3 mb-3">
+                      <Clock className="h-4 w-4 text-muted-foreground" />
+                      <div className="text-sm">
+                        <p className="font-medium">Response Time</p>
+                        <p className="text-xs text-muted-foreground">Within 24 hours</p>
+                      </div>
+                    </div>
+                    <p className="text-xs text-muted-foreground leading-relaxed">
+                      Professional event styling with delivery, setup, and breakdown services across Austin and surrounding areas.
+                    </p>
+                  </div>
+                </div>
               </SheetContent>
             </Sheet>
           </div>
