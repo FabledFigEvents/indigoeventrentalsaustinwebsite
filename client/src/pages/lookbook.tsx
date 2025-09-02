@@ -5,11 +5,14 @@ import { useCartHelpers } from '@/lib/cart-context';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { ShopTheLookModal } from '@/components/ui/shop-the-look-modal';
 import { ShoppingBag, Filter } from 'lucide-react';
 
 export default function Lookbook() {
   const { addItem } = useCartHelpers();
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [selectedLookItem, setSelectedLookItem] = useState<LookbookItem | null>(null);
 
   const { data: lookbookItems = [] } = useQuery<LookbookItem[]>({
     queryKey: ['/api/lookbook'],
@@ -38,14 +41,14 @@ export default function Lookbook() {
     return labels[category] || category;
   };
 
-  const shopTheLook = (item: LookbookItem) => {
-    if (!item.products) return;
-    
-    const lookProducts = products.filter(product => 
-      item.products?.includes(product.id)
-    );
-    
-    lookProducts.forEach(product => addItem(product));
+  const openShopModal = (item: LookbookItem) => {
+    setSelectedLookItem(item);
+    setIsModalOpen(true);
+  };
+
+  const closeShopModal = () => {
+    setIsModalOpen(false);
+    setSelectedLookItem(null);
   };
 
   return (
@@ -121,7 +124,7 @@ export default function Lookbook() {
                           className="bg-accent text-accent-foreground hover:bg-accent/90"
                           onClick={(e) => {
                             e.stopPropagation();
-                            shopTheLook(item);
+                            openShopModal(item);
                           }}
                           data-testid={`shop-look-${item.id}`}
                         >
@@ -173,6 +176,14 @@ export default function Lookbook() {
           </div>
         </div>
       </section>
+
+      {/* Shop the Look Modal */}
+      <ShopTheLookModal
+        isOpen={isModalOpen}
+        onClose={closeShopModal}
+        lookbookItem={selectedLookItem}
+        products={products}
+      />
     </main>
   );
 }
