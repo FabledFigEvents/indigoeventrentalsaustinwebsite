@@ -169,7 +169,7 @@ export default function Lookbook() {
             <Button
               variant="outline"
               size="lg"
-              className="border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary px-8 py-4 text-lg"
+              className="border-2 border-primary-foreground text-primary hover:bg-primary-foreground hover:text-primary px-8 py-4 text-lg"
               data-testid="browse-collections-button"
             >
               Browse Collections
