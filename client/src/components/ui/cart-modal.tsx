@@ -107,7 +107,16 @@ export function CartModal() {
                 <Users className="h-8 w-8" />
               </div>
               <h3 className="text-lg font-medium mb-2">Your quote is empty</h3>
-              <p className="text-sm">Add items from our collections to get started building your event</p>
+              <p className="text-sm mb-6">Add items from our collections to get started building your event</p>
+              <Link href="/catalog">
+                <Button
+                  className="bg-primary text-primary-foreground hover:bg-primary/90"
+                  onClick={closeCart}
+                  data-testid="browse-catalog-button"
+                >
+                  Browse Product Catalog
+                </Button>
+              </Link>
             </div>
           ) : (
             <>
