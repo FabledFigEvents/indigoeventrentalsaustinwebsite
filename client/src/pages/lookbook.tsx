@@ -70,7 +70,6 @@ export default function Lookbook() {
                 className="px-6 py-2 rounded-full"
                 data-testid={`lookbook-filter-${category}`}
               >
-                <Filter className="h-4 w-4 mr-2" />
                 {getCategoryLabel(category)}
               </Button>
             ))}
