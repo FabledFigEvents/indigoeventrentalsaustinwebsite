@@ -61,7 +61,7 @@ export function Navigation() {
               data-testid="cart-button"
             >
               <ShoppingCart className="h-4 w-4 mr-2" />
-              Cart (<span className="cart-count" data-testid="cart-count">{getItemCount()}</span>)
+              Cart({getItemCount()})
             </Button>
 
             {/* Mobile Menu */}
@@ -131,7 +131,7 @@ export function Navigation() {
                           className="w-full flex items-center p-3 border border-border rounded-lg hover:bg-muted transition-colors"
                         >
                           <ShoppingCart className="h-4 w-4 mr-3" />
-                          <span className="font-medium">View Cart ({getItemCount()})</span>
+                          <span className="font-medium">View Cart({getItemCount()})</span>
                         </button>
                       </div>
                     </div>
