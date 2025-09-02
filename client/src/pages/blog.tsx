@@ -273,8 +273,9 @@ export default function Blog() {
             
             <Link href="/contact">
               <Button 
-                size="lg"
-                className="bg-white text-primary hover:bg-white/90 px-8 py-4 text-lg"
+                size="action"
+                variant="secondary"
+                className="bg-white text-primary hover:bg-white/90"
                 data-testid="blog-contact-cta"
               >
                 Start Your Project

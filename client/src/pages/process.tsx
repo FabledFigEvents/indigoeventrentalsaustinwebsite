@@ -237,8 +237,7 @@ export default function Process() {
             <Link href="/contact">
               <a>
                 <Button
-                  size="lg"
-                  className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 text-lg"
+                  size="action"
                   data-testid="schedule-consultation-button"
                 >
                   Schedule Your Consultation
@@ -249,8 +248,8 @@ export default function Process() {
               <a>
                 <Button
                   variant="outline"
-                  size="lg"
-                  className="border-2 border-accent-foreground text-accent-foreground hover:bg-accent-foreground hover:text-accent px-8 py-4 text-lg"
+                  size="action"
+                  className="border-2 border-accent-foreground text-accent-foreground hover:bg-accent-foreground hover:text-accent"
                   data-testid="view-collections-button"
                 >
                   View Our Collections
