@@ -65,7 +65,7 @@ export function Navigation() {
             </a>
             <Button
               onClick={toggleCart}
-              className="bg-primary text-primary-foreground hover:bg-primary/90"
+              className="bg-primary text-primary-foreground hover:bg-white hover:text-primary hover:border-primary border border-transparent transition-colors duration-300"
               data-testid="cart-button"
             >
               <ShoppingCart className="h-4 w-4 mr-2" />
