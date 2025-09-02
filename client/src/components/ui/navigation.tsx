@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'wouter';
-import { Phone, ShoppingBag, Menu, X } from 'lucide-react';
+import { Phone, ShoppingCart, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { useCartHelpers } from '@/lib/cart-context';
 import { Button } from '@/components/ui/button';
@@ -68,8 +68,8 @@ export function Navigation() {
               className="bg-primary text-primary-foreground hover:bg-primary/90"
               data-testid="cart-button"
             >
-              <ShoppingBag className="h-4 w-4 mr-2" />
-              Quote (<span className="cart-count" data-testid="cart-count">{getItemCount()}</span>)
+              <ShoppingCart className="h-4 w-4 mr-2" />
+              Cart (<span className="cart-count" data-testid="cart-count">{getItemCount()}</span>)
             </Button>
 
             {/* Mobile Menu */}

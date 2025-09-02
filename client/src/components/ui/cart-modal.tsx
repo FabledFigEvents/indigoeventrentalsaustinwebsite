@@ -52,7 +52,7 @@ export function CartModal() {
       >
         <CardHeader className="border-b border-border">
           <div className="flex justify-between items-center">
-            <CardTitle className="text-2xl font-serif font-bold">Your Event Quote Builder</CardTitle>
+            <CardTitle className="text-2xl font-serif font-bold">Your Event Cart</CardTitle>
             <Button
               variant="ghost"
               size="sm"

@@ -64,9 +64,8 @@ export default function Home() {
             <Link href="/contact">
               <a>
                 <Button
-                  variant="outline"
                   size="lg"
-                  className="border-2 border-white text-white hover:bg-white hover:text-primary px-8 py-4 text-lg"
+                  className="bg-white/10 border-2 border-white text-white hover:bg-white hover:text-primary px-8 py-4 text-lg backdrop-blur-sm"
                   data-testid="get-quote-button"
                 >
                   Get a Quote
