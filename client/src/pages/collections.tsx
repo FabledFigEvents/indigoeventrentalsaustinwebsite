@@ -7,6 +7,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { ArrowRight, Users, Sparkles } from 'lucide-react';
 import { ProductSelectionModal } from '@/components/ui/product-selection-modal';
+import { Footer } from '@/components/ui/footer';
 
 export default function Collections() {
   const { addItem } = useCartHelpers();
@@ -203,6 +204,7 @@ export default function Collections() {
           </div>
         </div>
       </section>
+      <Footer />
       {/* Product Selection Modal */}
       <ProductSelectionModal
         isOpen={isModalOpen}

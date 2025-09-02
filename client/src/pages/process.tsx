@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Link } from 'wouter';
+import { Footer } from '@/components/ui/footer';
 
 export default function Process() {
   const processSteps = [
@@ -259,6 +260,7 @@ export default function Process() {
           </div>
         </div>
       </section>
+      <Footer />
     </main>
   );
 }

@@ -2,6 +2,7 @@ import { Users, Heart, Star, Award, Phone, Mail, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'wouter';
+import { Footer } from '@/components/ui/footer';
 
 export default function About() {
   const values = [
@@ -280,6 +281,7 @@ export default function About() {
           </div>
         </div>
       </section>
+      <Footer />
     </main>
   );
 }

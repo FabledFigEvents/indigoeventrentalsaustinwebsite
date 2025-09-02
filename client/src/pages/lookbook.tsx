@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { ProductSelectionModal } from '@/components/ui/product-selection-modal';
+import { Footer } from '@/components/ui/footer';
 import { ShoppingBag, Filter } from 'lucide-react';
 
 export default function Lookbook() {
@@ -176,6 +177,7 @@ export default function Lookbook() {
           </div>
         </div>
       </section>
+      <Footer />
 
       {/* Shop the Look Modal */}
       <ProductSelectionModal

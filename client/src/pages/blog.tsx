@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Link } from 'wouter';
+import { Footer } from '@/components/ui/footer';
 
 export default function Blog() {
   const blogPosts = [
@@ -283,6 +284,7 @@ export default function Blog() {
           </div>
         </div>
       </section>
+      <Footer />
     </main>
   );
 }

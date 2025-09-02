@@ -14,6 +14,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Separator } from '@/components/ui/separator';
 import { Phone, Mail, MapPin, Calendar, Users, MessageCircle, Sparkles, CheckCircle } from 'lucide-react';
+import { Footer } from '@/components/ui/footer';
 
 export default function Contact() {
   const { 
@@ -503,6 +504,7 @@ export default function Contact() {
           </div>
         </div>
       </section>
+      <Footer />
     </main>
   );
 }

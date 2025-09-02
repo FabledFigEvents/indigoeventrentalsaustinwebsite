@@ -7,6 +7,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Plus, Filter, Minus } from 'lucide-react';
+import { Footer } from '@/components/ui/footer';
 
 export default function Catalog() {
   const { addItem } = useCartHelpers();
@@ -281,6 +282,7 @@ export default function Catalog() {
           )}
         </div>
       </section>
+      <Footer />
     </main>
   );
 }
