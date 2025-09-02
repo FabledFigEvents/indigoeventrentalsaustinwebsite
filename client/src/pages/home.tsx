@@ -279,6 +279,22 @@ export default function Home() {
               </div>
             )}
           </div>
+          
+          {/* View Full Catalog Button */}
+          <div className="text-center mt-12">
+            <Link href="/catalog">
+              <a>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="px-8 py-4 text-lg border-2 hover:bg-primary hover:text-primary-foreground transition-colors"
+                  data-testid="view-full-catalog-button"
+                >
+                  View Full Product Catalog
+                </Button>
+              </a>
+            </Link>
+          </div>
         </div>
       </section>
 
