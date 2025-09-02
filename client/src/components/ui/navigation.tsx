@@ -11,8 +11,8 @@ export function Navigation() {
   const { getItemCount, toggleCart } = useCartHelpers();
 
   const navItems = [
-    { href: '/collections', label: 'Designer Collections' },
     { href: '/catalog', label: 'Product Catalog' },
+    { href: '/collections', label: 'Designer Collections' },
     { href: '/lookbook', label: 'Lookbook' },
     { href: '/about', label: 'About Indigo' },
     { href: '/blog', label: 'Blog' },
