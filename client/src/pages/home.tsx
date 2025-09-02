@@ -482,7 +482,7 @@ export default function Home() {
       {/* Real Indigo Looks Image Modal */}
       {isLookImageModalOpen && selectedLookImage && (
         <div 
-          className={`fixed inset-0 bg-black z-50 flex items-center justify-center transition-opacity duration-300 ${
+          className={`fixed inset-0 bg-black/70 z-50 flex items-center justify-center transition-opacity duration-300 ${
             isLookImageModalOpen ? 'opacity-100' : 'opacity-0'
           }`}
           onClick={closeLookImageModal}
