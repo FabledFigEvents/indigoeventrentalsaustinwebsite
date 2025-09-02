@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'wouter';
-import { Phone, ShoppingCart, Menu, X, MessageCircle, Mail, MapPin, Clock, Star, ArrowRight } from 'lucide-react';
+import { Phone, ShoppingCart, Menu, X, MessageCircle, Mail, MapPin, Clock, ArrowRight } from 'lucide-react';
 import { useState } from 'react';
 import { useCartHelpers } from '@/lib/cart-context';
 import { Button } from '@/components/ui/button';
@@ -55,14 +55,6 @@ export function Navigation() {
 
           {/* Actions */}
           <div className="flex items-center space-x-4">
-            <a
-              href="tel:5125188400"
-              className="hidden sm:flex items-center text-sm text-muted-foreground hover:text-primary transition-colors"
-              data-testid="phone-link"
-            >
-              <Phone className="h-4 w-4 mr-2" />
-              (512) 518-8400
-            </a>
             <Button
               onClick={toggleCart}
               className="bg-primary text-primary-foreground hover:bg-white hover:text-primary hover:border-primary border border-transparent transition-colors duration-300"
@@ -83,19 +75,9 @@ export function Navigation() {
                 <div className="flex flex-col h-full overflow-hidden">
                   {/* Header */}
                   <div className="p-6 border-b border-border bg-primary text-primary-foreground">
-                    <div className="flex items-center justify-between mb-4">
-                      <div>
-                        <h1 className="text-2xl font-serif font-bold">INDIGO</h1>
-                        <p className="text-xs opacity-90 tracking-wide">AUSTIN EVENT RENTALS</p>
-                      </div>
-                      <div className="flex items-center space-x-1 text-xs">
-                        <Star className="h-3 w-3 fill-current" />
-                        <Star className="h-3 w-3 fill-current" />
-                        <Star className="h-3 w-3 fill-current" />
-                        <Star className="h-3 w-3 fill-current" />
-                        <Star className="h-3 w-3 fill-current" />
-                        <span className="ml-1 font-medium">4.9/5</span>
-                      </div>
+                    <div className="mb-4">
+                      <h1 className="text-2xl font-serif font-bold">INDIGO</h1>
+                      <p className="text-xs opacity-90 tracking-wide">AUSTIN EVENT RENTALS</p>
                     </div>
                     <p className="text-sm opacity-90">
                       Curating signature style for Austin's most memorable events
