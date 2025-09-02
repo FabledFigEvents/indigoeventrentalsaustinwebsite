@@ -129,14 +129,14 @@ export default function Catalog() {
                       {categoryProducts.map((product) => (
                         <Card
                           key={product.id}
-                          className="product-card overflow-hidden shadow-sm hover:shadow-lg transition-shadow h-full flex flex-col"
+                          className="product-card overflow-hidden shadow-sm hover:shadow-lg transition-shadow flex flex-col min-h-[480px]"
                           data-testid={`product-card-${product.id}`}
                         >
                           <div className="relative overflow-hidden">
                             <img
                               src={product.imageUrl}
                               alt={product.name}
-                              className="w-full h-64 object-cover"
+                              className="w-full h-48 object-cover"
                             />
                             {product.vibe && product.vibe.length > 0 && (
                               <div className="absolute bottom-4 left-4">
@@ -219,18 +219,18 @@ export default function Catalog() {
             </div>
           ) : (
             /* Single category view */
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" data-testid="products-grid">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 auto-rows-fr" data-testid="products-grid">
               {displayProducts.map((product) => (
                 <Card
                   key={product.id}
-                  className="product-card overflow-hidden shadow-sm hover:shadow-lg transition-shadow h-full flex flex-col"
+                  className="product-card overflow-hidden shadow-sm hover:shadow-lg transition-shadow flex flex-col min-h-[480px]"
                   data-testid={`product-card-${product.id}`}
                 >
                   <div className="relative overflow-hidden">
                     <img
                       src={product.imageUrl}
                       alt={product.name}
-                      className="w-full h-64 object-cover"
+                      className="w-full h-48 object-cover"
                     />
                     {product.vibe && product.vibe.length > 0 && (
                       <div className="absolute bottom-4 left-4">
