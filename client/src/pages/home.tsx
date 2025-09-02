@@ -18,6 +18,7 @@ export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedLookImage, setSelectedLookImage] = useState<any>(null);
   const [isLookImageModalOpen, setIsLookImageModalOpen] = useState(false);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   const { data: products = [] } = useQuery<Product[]>({
     queryKey: ['/api/products'],
@@ -94,12 +95,16 @@ export default function Home() {
 
   const openLookImageModal = (lookImage: any) => {
     setSelectedLookImage(lookImage);
+    setIsImageLoaded(false);
     setIsLookImageModalOpen(true);
   };
 
   const closeLookImageModal = () => {
-    setSelectedLookImage(null);
     setIsLookImageModalOpen(false);
+    setTimeout(() => {
+      setSelectedLookImage(null);
+      setIsImageLoaded(false);
+    }, 300);
   };
 
   return (
@@ -331,18 +336,19 @@ export default function Home() {
             {realIndigoLooks.map((lookImage) => (
               <div 
                 key={lookImage.id}
-                className="relative overflow-hidden rounded-lg aspect-square group cursor-pointer"
+                className="relative overflow-hidden rounded-lg aspect-square group cursor-pointer transform transition-all duration-300 hover:scale-[1.02] hover:shadow-xl"
                 onClick={() => openLookImageModal(lookImage)}
                 data-testid={`look-image-${lookImage.id}`}
               >
                 <img
                   src={lookImage.src.replace('w=800&h=800', 'w=400&h=400')}
                   alt={lookImage.alt}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ease-out"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <p className="text-white text-sm font-medium">{lookImage.title}</p>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
+                <div className="absolute bottom-4 left-4 transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                  <p className="text-white text-sm font-semibold drop-shadow-lg">{lookImage.title}</p>
+                  <p className="text-white/80 text-xs mt-1">Click to view</p>
                 </div>
               </div>
             ))}
@@ -475,24 +481,47 @@ export default function Home() {
 
       {/* Real Indigo Looks Image Modal */}
       {isLookImageModalOpen && selectedLookImage && (
-        <div className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center" onClick={closeLookImageModal}>
-          <div className="relative max-w-[95vw] max-h-[95vh]" onClick={(e) => e.stopPropagation()}>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="absolute -top-12 right-0 text-white hover:bg-white/20"
-              onClick={closeLookImageModal}
-              data-testid="close-look-modal-button"
-            >
-              <X className="h-6 w-6" />
-            </Button>
-            
+        <div 
+          className={`fixed inset-0 bg-black z-50 flex items-center justify-center transition-opacity duration-300 ${
+            isLookImageModalOpen ? 'opacity-100' : 'opacity-0'
+          }`}
+          onClick={closeLookImageModal}
+        >
+          {/* Close Button */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="absolute top-6 right-6 z-10 text-white hover:bg-white/20 transition-colors"
+            onClick={closeLookImageModal}
+            data-testid="close-look-modal-button"
+          >
+            <X className="h-6 w-6" />
+          </Button>
+
+          {/* Image Container */}
+          <div 
+            className={`relative max-w-[90vw] max-h-[90vh] transition-all duration-500 ease-out ${
+              isImageLoaded ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
+            }`}
+            onClick={(e) => e.stopPropagation()}
+          >
             <img
               src={selectedLookImage.src}
               alt={selectedLookImage.alt}
-              className="max-w-full max-h-[95vh] object-contain"
+              className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
+              onLoad={() => setIsImageLoaded(true)}
               data-testid={`large-look-image-${selectedLookImage.id}`}
             />
+            
+            {/* Text Overlay */}
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6 rounded-b-lg">
+              <h3 className="text-white text-2xl font-serif font-bold mb-2" data-testid={`look-title-${selectedLookImage.id}`}>
+                {selectedLookImage.title}
+              </h3>
+              <p className="text-white/90 text-sm leading-relaxed" data-testid={`look-description-${selectedLookImage.id}`}>
+                {selectedLookImage.description}
+              </p>
+            </div>
           </div>
         </div>
       )}
