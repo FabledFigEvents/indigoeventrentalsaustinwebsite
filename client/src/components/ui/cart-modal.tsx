@@ -175,12 +175,12 @@ export function CartModal() {
                   <div className="flex justify-between">
                     <span>Delivery Fee</span>
                     <span data-testid="delivery-fee" className="flex items-center">
-                      ${deliveryFee.toFixed(2)}
                       {!location.toLowerCase().includes('austin') && (
-                        <Badge variant="outline" className="ml-2 text-xs">
+                        <Badge variant="outline" className="mr-2 text-xs">
                           +$25 outside Austin
                         </Badge>
                       )}
+                      ${deliveryFee.toFixed(2)}
                     </span>
                   </div>
                   <div className="flex justify-between">
