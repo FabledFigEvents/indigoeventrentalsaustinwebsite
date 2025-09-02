@@ -16,7 +16,15 @@ import { Separator } from '@/components/ui/separator';
 import { Phone, Mail, MapPin, Calendar, Users, MessageCircle, Sparkles, CheckCircle } from 'lucide-react';
 
 export default function Contact() {
-  const { items, getSubtotal } = useCartHelpers();
+  const { 
+    items, 
+    guestCount, 
+    location, 
+    getSubtotal, 
+    calculateDeliveryFee, 
+    calculateSetupFee, 
+    getQuoteTotal 
+  } = useCartHelpers();
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -34,9 +42,9 @@ export default function Contact() {
       phone: '',
       eventType: '',
       eventDate: '',
-      guestCount: undefined,
-      location: '',
-      message: '',
+      guestCount: guestCount || undefined,
+      location: location || '',
+      message: items.length > 0 ? `I'm interested in a quote for the items in my cart. My event will have approximately ${guestCount} guests in ${location}.` : '',
       items: items.map(item => `${item.product.name} (${item.quantity}x)`),
     },
   });
@@ -83,9 +91,9 @@ export default function Contact() {
   ];
 
   const subtotal = getSubtotal();
-  const estimatedDelivery = 50;
-  const estimatedSetup = 75;
-  const estimatedTotal = subtotal + estimatedDelivery + estimatedSetup;
+  const estimatedDelivery = calculateDeliveryFee();
+  const estimatedSetup = calculateSetupFee();
+  const estimatedTotal = getQuoteTotal();
 
   if (isSubmitted) {
     return (
@@ -230,6 +238,7 @@ export default function Contact() {
                                   type="tel"
                                   placeholder="(512) 555-0123" 
                                   {...field}
+                                  value={field.value || ''}
                                   data-testid="input-phone"
                                 />
                               </FormControl>
@@ -292,11 +301,11 @@ export default function Contact() {
                               <FormControl>
                                 <Input 
                                   type="number"
-                                  placeholder="50"
+                                  placeholder={guestCount?.toString() || "50"}
                                   min="1"
                                   max="1000"
                                   {...field}
-                                  value={field.value || ''}
+                                  value={field.value || guestCount || ''}
                                   onChange={(e) => field.onChange(e.target.value ? parseInt(e.target.value) : undefined)}
                                   data-testid="input-guest-count"
                                 />
@@ -315,8 +324,9 @@ export default function Contact() {
                             <FormLabel>Event Location</FormLabel>
                             <FormControl>
                               <Input 
-                                placeholder="Austin, TX or specific venue name"
+                                placeholder={location || "Austin, TX or specific venue name"}
                                 {...field}
+                                value={field.value || location || ''}
                                 data-testid="input-location"
                               />
                             </FormControl>
@@ -336,6 +346,7 @@ export default function Contact() {
                                 placeholder="Describe your event style, theme, special requirements, or any questions you have..."
                                 className="min-h-[120px]"
                                 {...field}
+                                value={field.value || ''}
                                 data-testid="textarea-message"
                               />
                             </FormControl>
@@ -377,6 +388,17 @@ export default function Contact() {
                     <CardTitle className="text-xl font-serif font-bold">Current Quote</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
+                    <div className="text-sm space-y-2 mb-4">
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Guests:</span>
+                        <span className="font-medium">{guestCount}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Location:</span>
+                        <span className="font-medium">{location}</span>
+                      </div>
+                    </div>
+                    <Separator />
                     {items.map((item) => (
                       <div key={item.product.id} className="flex justify-between items-center text-sm">
                         <span>{item.product.name} (×{item.quantity})</span>
@@ -386,16 +408,20 @@ export default function Contact() {
                     <Separator />
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
-                        <span>Subtotal</span>
+                        <span>Subtotal ({items.reduce((sum, item) => sum + item.quantity, 0)} items)</span>
                         <span>${subtotal.toFixed(2)}</span>
                       </div>
                       <div className="flex justify-between text-muted-foreground">
-                        <span>Est. Delivery</span>
+                        <span>Delivery Fee</span>
                         <span>${estimatedDelivery.toFixed(2)}</span>
                       </div>
                       <div className="flex justify-between text-muted-foreground">
-                        <span>Est. Setup</span>
+                        <span>Setup Service</span>
                         <span>${estimatedSetup.toFixed(2)}</span>
+                      </div>
+                      <div className="flex justify-between text-muted-foreground text-xs">
+                        <span>Damage Waiver</span>
+                        <span>$25.00</span>
                       </div>
                       <Separator />
                       <div className="flex justify-between font-semibold">

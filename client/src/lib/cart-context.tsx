@@ -9,12 +9,16 @@ interface CartItem {
 interface CartState {
   items: CartItem[];
   isOpen: boolean;
+  guestCount: number;
+  location: string;
 }
 
 type CartAction =
   | { type: 'ADD_ITEM'; payload: Product }
   | { type: 'REMOVE_ITEM'; payload: string }
   | { type: 'UPDATE_QUANTITY'; payload: { id: string; quantity: number } }
+  | { type: 'SET_GUEST_COUNT'; payload: number }
+  | { type: 'SET_LOCATION'; payload: string }
   | { type: 'CLEAR_CART' }
   | { type: 'TOGGLE_CART' }
   | { type: 'OPEN_CART' }
@@ -23,6 +27,8 @@ type CartAction =
 const initialState: CartState = {
   items: [],
   isOpen: false,
+  guestCount: 50,
+  location: 'Austin, TX',
 };
 
 function cartReducer(state: CartState, action: CartAction): CartState {
@@ -57,6 +63,16 @@ function cartReducer(state: CartState, action: CartAction): CartState {
             ? { ...item, quantity: action.payload.quantity }
             : item
         ).filter(item => item.quantity > 0),
+      };
+    case 'SET_GUEST_COUNT':
+      return {
+        ...state,
+        guestCount: action.payload,
+      };
+    case 'SET_LOCATION':
+      return {
+        ...state,
+        location: action.payload,
       };
     case 'CLEAR_CART':
       return {
@@ -141,23 +157,97 @@ export function useCartHelpers() {
     return state.items.reduce((total, item) => total + item.quantity, 0);
   };
 
+  const setGuestCount = (count: number) => {
+    dispatch({ type: 'SET_GUEST_COUNT', payload: count });
+  };
+
+  const setLocation = (location: string) => {
+    dispatch({ type: 'SET_LOCATION', payload: location });
+  };
+
   const getSubtotal = () => {
     return state.items.reduce((total, item) => {
       return total + (parseFloat(item.product.price) * item.quantity);
     }, 0);
   };
 
+  const calculateDeliveryFee = () => {
+    // Base delivery fee with distance calculation
+    const baseDelivery = 50;
+    const isAustinArea = state.location.toLowerCase().includes('austin') || 
+                        state.location.toLowerCase().includes('tx');
+    return isAustinArea ? baseDelivery : baseDelivery + 25;
+  };
+
+  const calculateSetupFee = () => {
+    // Setup fee based on number of items and complexity
+    const itemCount = getItemCount();
+    const baseSetup = 75;
+    if (itemCount > 20) return baseSetup + 50;
+    if (itemCount > 10) return baseSetup + 25;
+    return baseSetup;
+  };
+
+  const getQuoteTotal = () => {
+    const subtotal = getSubtotal();
+    const delivery = calculateDeliveryFee();
+    const setup = calculateSetupFee();
+    const damageWaiver = 25;
+    return subtotal + delivery + setup + damageWaiver;
+  };
+
+  const getSuggestedQuantity = (product: Product) => {
+    const { guestCount } = state;
+    
+    switch (product.category) {
+      case 'seating':
+        return Math.ceil(guestCount / 8); // 8 chairs per table
+      case 'tables':
+        return Math.ceil(guestCount / 8); // 8 guests per table
+      case 'linens':
+        return Math.ceil(guestCount / 8); // One per table
+      case 'lighting':
+        return Math.ceil(guestCount / 25); // One light per 25 guests
+      default:
+        return 1;
+    }
+  };
+
+  const getMissingRecommendations = () => {
+    const hasSeating = state.items.some(item => item.product.category === 'seating');
+    const hasTables = state.items.some(item => item.product.category === 'tables');
+    const hasLinens = state.items.some(item => item.product.category === 'linens');
+    const hasLighting = state.items.some(item => item.product.category === 'lighting');
+
+    const recommendations = [];
+    if (!hasSeating) recommendations.push('seating');
+    if (!hasTables) recommendations.push('tables');
+    if (!hasLinens) recommendations.push('linens');
+    if (!hasLighting) recommendations.push('lighting');
+    
+    return recommendations;
+  };
+
   return {
     items: state.items,
     isOpen: state.isOpen,
+    guestCount: state.guestCount,
+    location: state.location,
     addItem,
     removeItem,
     updateQuantity,
+    setGuestCount,
+    setLocation,
     clearCart,
     toggleCart,
     openCart,
     closeCart,
     getItemCount,
     getSubtotal,
+    calculateDeliveryFee,
+    calculateSetupFee,
+    getQuoteTotal,
+    getSuggestedQuantity,
+    getMissingRecommendations,
   };
 }
