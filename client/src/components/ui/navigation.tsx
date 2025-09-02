@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'wouter';
-import { Phone, ShoppingCart, Menu, X } from 'lucide-react';
+import { Phone, ShoppingCart, Menu, X, MessageCircle } from 'lucide-react';
 import { useState } from 'react';
 import { useCartHelpers } from '@/lib/cart-context';
 import { Button } from '@/components/ui/button';
@@ -109,10 +109,10 @@ export function StickyQuoteButton() {
         <a>
           <Button
             className="bg-accent text-accent-foreground shadow-lg hover:shadow-xl hover:bg-accent/90 rounded-full px-6 py-3"
-            data-testid="sticky-quote-button"
+            data-testid="sticky-message-button"
           >
-            <i className="fas fa-sparkles mr-2"></i>
-            Get a Quote
+            <MessageCircle className="h-4 w-4 mr-2" />
+            Send a Message
           </Button>
         </a>
       </Link>
