@@ -120,7 +120,7 @@ export function Navigation() {
                             onClick={() => setIsOpen(false)}
                           >
                             <MessageCircle className="h-4 w-4 mr-3" />
-                            <span className="font-medium">Request Quote</span>
+                            <span className="font-medium">Send us a Message</span>
                           </a>
                         </Link>
                         <button
