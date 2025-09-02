@@ -69,7 +69,7 @@ export default function Home() {
                   className="border-2 border-white text-white hover:bg-white hover:text-primary transition-colors duration-300 px-8 py-4 text-lg bg-transparent"
                   data-testid="get-quote-button"
                 >
-                  Get a Quote
+                  Start a Quote
                 </Button>
               </a>
             </Link>
