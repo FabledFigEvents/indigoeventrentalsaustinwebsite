@@ -14,8 +14,8 @@ export function Navigation() {
     { href: '/collections', label: 'Designer Collections' },
     { href: '/catalog', label: 'Product Catalog' },
     { href: '/lookbook', label: 'Lookbook' },
-    { href: '/blog', label: 'Blog' },
     { href: '/about', label: 'About Indigo' },
+    { href: '/blog', label: 'Blog' },
   ];
 
   const NavLinks = ({ mobile = false }: { mobile?: boolean }) => (
@@ -37,7 +37,7 @@ export function Navigation() {
   );
 
   return (
-    <header className="fixed top-0 w-full bg-background/95 backdrop-blur-sm z-50 border-b border-border">
+    <header className="fixed top-0 w-full bg-white z-50 border-b border-border shadow-sm">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
@@ -75,7 +75,7 @@ export function Navigation() {
             {/* Mobile Menu */}
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" className="md:hidden" data-testid="mobile-menu-trigger">
+                <Button variant="ghost" className="" data-testid="mobile-menu-trigger">
                   <Menu className="h-6 w-6" />
                 </Button>
               </SheetTrigger>
