@@ -51,9 +51,13 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div
-          className="absolute inset-0 bg-cover bg-center"
+          className="absolute inset-0 bg-cover"
           style={{
             backgroundImage: 'url(https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2098&h=1400)',
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            transform: 'scale(1.25)',
+            transformOrigin: 'center',
           }}
         ></div>
         <div className="absolute inset-0 hero-overlay"></div>
