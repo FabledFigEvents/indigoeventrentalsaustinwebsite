@@ -389,7 +389,7 @@ export default function Home() {
       </section>
 
       {/* Call to Action */}
-      <section className="py-20 bg-accent text-accent-foreground">
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-5xl font-serif font-bold mb-6">
             Ready to Curate Your Event Look?
