@@ -129,87 +129,74 @@ export default function Catalog() {
                       {categoryProducts.map((product) => (
                         <Card
                           key={product.id}
-                          className="product-card overflow-hidden shadow-sm hover:shadow-lg transition-shadow flex flex-col min-h-[480px]"
+                          className="product-card bg-white border shadow-sm hover:shadow-md transition-shadow"
                           data-testid={`product-card-${product.id}`}
                         >
-                          <div className="relative overflow-hidden">
+                          <div className="relative">
                             <img
                               src={product.imageUrl}
                               alt={product.name}
-                              className="w-full h-48 object-cover"
+                              className="w-full h-56 object-cover"
                             />
                             {product.vibe && product.vibe.length > 0 && (
-                              <div className="absolute bottom-4 left-4">
-                                <Badge variant="secondary" className="bg-black/50 text-white">
+                              <div className="absolute top-3 left-3">
+                                <Badge variant="secondary" className="bg-black/70 text-white text-xs">
                                   {product.vibe[0].charAt(0).toUpperCase() + product.vibe[0].slice(1)}
                                 </Badge>
                               </div>
                             )}
                           </div>
-                          <CardContent className="p-6 flex-1 flex flex-col">
-                            <h3 className="font-serif text-xl font-bold mb-2">{product.name}</h3>
-                            <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
-                              {product.description}
-                            </p>
-                            {product.styleNotes && (
-                              <p className="text-xs text-muted-foreground mb-3 italic">
-                                {product.styleNotes}
+                          
+                          <div className="p-4 space-y-3">
+                            <div>
+                              <h3 className="font-serif text-lg font-semibold leading-tight">{product.name}</h3>
+                              <p className="text-sm text-muted-foreground mt-1 line-clamp-2">
+                                {product.description}
                               </p>
-                            )}
-                            <div className="flex justify-between items-center mb-4">
-                              <span className="font-medium text-lg" data-testid={`price-${product.id}`}>
-                                ${product.price} each
-                              </span>
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                className="text-primary text-sm font-medium hover:underline"
-                                data-testid={`view-details-${product.id}`}
-                              >
-                                View Details
-                              </Button>
                             </div>
                             
-                            {/* Quantity Controls */}
-                            <div className="flex items-center gap-3 mt-auto">
-                              <div className="flex items-center border rounded-md">
+                            <div className="text-lg font-medium text-primary" data-testid={`price-${product.id}`}>
+                              ${product.price} each
+                            </div>
+                            
+                            <div className="flex items-center gap-2 pt-2">
+                              <div className="flex items-center border rounded">
                                 <Button
                                   variant="ghost"
                                   size="sm"
-                                  className="h-8 w-8 p-0"
+                                  className="h-9 w-9 p-0 hover:bg-gray-100"
                                   onClick={() => updateQuantity(product.id, getQuantity(product.id) - 1)}
                                   data-testid={`decrease-quantity-${product.id}`}
                                 >
-                                  <Minus className="h-3 w-3" />
+                                  <Minus className="h-4 w-4" />
                                 </Button>
                                 <Input
                                   type="number"
                                   min="1"
                                   value={getQuantity(product.id)}
                                   onChange={(e) => updateQuantity(product.id, parseInt(e.target.value) || 1)}
-                                  className="h-8 w-12 text-center border-0 text-sm"
+                                  className="h-9 w-14 text-center border-0 focus:ring-0 text-sm font-medium"
                                   data-testid={`quantity-input-${product.id}`}
                                 />
                                 <Button
                                   variant="ghost"
                                   size="sm"
-                                  className="h-8 w-8 p-0"
+                                  className="h-9 w-9 p-0 hover:bg-gray-100"
                                   onClick={() => updateQuantity(product.id, getQuantity(product.id) + 1)}
                                   data-testid={`increase-quantity-${product.id}`}
                                 >
-                                  <Plus className="h-3 w-3" />
+                                  <Plus className="h-4 w-4" />
                                 </Button>
                               </div>
                               <Button
-                                size="sm"
-                                className="flex-1"
+                                className="flex-1 h-9"
                                 onClick={() => addToCart(product)}
                                 data-testid={`add-to-cart-${product.id}`}
                               >
                                 Add to Cart
                               </Button>
                             </div>
-                          </CardContent>
+                          </div>
                         </Card>
                       ))}
                     </div>
@@ -223,87 +210,74 @@ export default function Catalog() {
               {displayProducts.map((product) => (
                 <Card
                   key={product.id}
-                  className="product-card overflow-hidden shadow-sm hover:shadow-lg transition-shadow flex flex-col min-h-[480px]"
+                  className="product-card bg-white border shadow-sm hover:shadow-md transition-shadow"
                   data-testid={`product-card-${product.id}`}
                 >
-                  <div className="relative overflow-hidden">
+                  <div className="relative">
                     <img
                       src={product.imageUrl}
                       alt={product.name}
-                      className="w-full h-48 object-cover"
+                      className="w-full h-56 object-cover"
                     />
                     {product.vibe && product.vibe.length > 0 && (
-                      <div className="absolute bottom-4 left-4">
-                        <Badge variant="secondary" className="bg-black/50 text-white">
+                      <div className="absolute top-3 left-3">
+                        <Badge variant="secondary" className="bg-black/70 text-white text-xs">
                           {product.vibe[0].charAt(0).toUpperCase() + product.vibe[0].slice(1)}
                         </Badge>
                       </div>
                     )}
                   </div>
-                  <CardContent className="p-6 flex-1 flex flex-col">
-                    <h3 className="font-serif text-xl font-bold mb-2">{product.name}</h3>
-                    <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
-                      {product.description}
-                    </p>
-                    {product.styleNotes && (
-                      <p className="text-xs text-muted-foreground mb-3 italic">
-                        {product.styleNotes}
+                  
+                  <div className="p-4 space-y-3">
+                    <div>
+                      <h3 className="font-serif text-lg font-semibold leading-tight">{product.name}</h3>
+                      <p className="text-sm text-muted-foreground mt-1 line-clamp-2">
+                        {product.description}
                       </p>
-                    )}
-                    <div className="flex justify-between items-center mb-4">
-                      <span className="font-medium text-lg" data-testid={`price-${product.id}`}>
-                        ${product.price} each
-                      </span>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="text-primary text-sm font-medium hover:underline"
-                        data-testid={`view-details-${product.id}`}
-                      >
-                        View Details
-                      </Button>
                     </div>
                     
-                    {/* Quantity Controls */}
-                    <div className="flex items-center gap-3 mt-auto">
-                      <div className="flex items-center border rounded-md">
+                    <div className="text-lg font-medium text-primary" data-testid={`price-${product.id}`}>
+                      ${product.price} each
+                    </div>
+                    
+                    <div className="flex items-center gap-2 pt-2">
+                      <div className="flex items-center border rounded">
                         <Button
                           variant="ghost"
                           size="sm"
-                          className="h-8 w-8 p-0"
+                          className="h-9 w-9 p-0 hover:bg-gray-100"
                           onClick={() => updateQuantity(product.id, getQuantity(product.id) - 1)}
                           data-testid={`decrease-quantity-${product.id}`}
                         >
-                          <Minus className="h-3 w-3" />
+                          <Minus className="h-4 w-4" />
                         </Button>
                         <Input
                           type="number"
                           min="1"
                           value={getQuantity(product.id)}
                           onChange={(e) => updateQuantity(product.id, parseInt(e.target.value) || 1)}
-                          className="h-8 w-12 text-center border-0 text-sm"
+                          className="h-9 w-14 text-center border-0 focus:ring-0 text-sm font-medium"
                           data-testid={`quantity-input-${product.id}`}
                         />
                         <Button
                           variant="ghost"
                           size="sm"
-                          className="h-8 w-8 p-0"
+                          className="h-9 w-9 p-0 hover:bg-gray-100"
                           onClick={() => updateQuantity(product.id, getQuantity(product.id) + 1)}
                           data-testid={`increase-quantity-${product.id}`}
                         >
-                          <Plus className="h-3 w-3" />
+                          <Plus className="h-4 w-4" />
                         </Button>
                       </div>
                       <Button
-                        size="sm"
-                        className="flex-1"
+                        className="flex-1 h-9"
                         onClick={() => addToCart(product)}
                         data-testid={`add-to-cart-${product.id}`}
                       >
                         Add to Cart
                       </Button>
                     </div>
-                  </CardContent>
+                  </div>
                 </Card>
               ))}
             </div>
