@@ -11,11 +11,10 @@ export function Navigation() {
   const { getItemCount, toggleCart } = useCartHelpers();
 
   const navItems = [
-    { href: '/collections', label: 'Collections' },
-    { href: '/catalog', label: 'Catalog' },
-    { href: '/lookbook', label: 'Lookbook' },
-    { href: '/process', label: 'Process' },
-    { href: '/about', label: 'About' },
+    { href: '/collections', label: 'Designer Collections' },
+    { href: '/catalog', label: 'Product Catalog' },
+    { href: '/lookbook', label: 'Lookbook/Gallery' },
+    { href: '/about', label: 'House of Indigo' },
   ];
 
   const NavLinks = ({ mobile = false }: { mobile?: boolean }) => (

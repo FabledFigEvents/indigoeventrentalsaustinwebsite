@@ -337,7 +337,7 @@ export default function Home() {
                 <li><Link href="/lookbook"><a className="hover:opacity-100 transition-opacity">Wedding Styling</a></Link></li>
                 <li><Link href="/lookbook"><a className="hover:opacity-100 transition-opacity">Corporate Events</a></Link></li>
                 <li><Link href="/lookbook"><a className="hover:opacity-100 transition-opacity">Private Parties</a></Link></li>
-                <li><Link href="/process"><a className="hover:opacity-100 transition-opacity">Delivery & Setup</a></Link></li>
+                <li><Link href="/about"><a className="hover:opacity-100 transition-opacity">Delivery & Setup</a></Link></li>
               </ul>
             </div>
 

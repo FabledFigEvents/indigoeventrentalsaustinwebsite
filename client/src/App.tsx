@@ -11,7 +11,6 @@ import Home from "@/pages/home";
 import Catalog from "@/pages/catalog";
 import Collections from "@/pages/collections";
 import Lookbook from "@/pages/lookbook";
-import Process from "@/pages/process";
 import About from "@/pages/about";
 import Contact from "@/pages/contact";
 
@@ -22,7 +21,6 @@ function Router() {
       <Route path="/catalog" component={Catalog} />
       <Route path="/collections" component={Collections} />
       <Route path="/lookbook" component={Lookbook} />
-      <Route path="/process" component={Process} />
       <Route path="/about" component={About} />
       <Route path="/contact" component={Contact} />
       <Route component={NotFound} />
