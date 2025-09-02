@@ -62,7 +62,7 @@ export default function Catalog() {
   return (
     <main className="pt-20">
       {/* Header */}
-      <section className="py-20 bg-muted">
+      <section className="pt-20 pb-12 bg-muted">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h1 className="text-5xl font-serif font-bold mb-6">The Atelier</h1>
@@ -72,7 +72,7 @@ export default function Catalog() {
           </div>
 
           {/* Filters */}
-          <div className="space-y-6 mb-12">
+          <div className="space-y-6 mb-6">
             {/* All Pieces Filter */}
             <div className="flex justify-center">
               <Button
@@ -106,7 +106,7 @@ export default function Catalog() {
       </section>
 
       {/* Products Grid */}
-      <section className="py-20">
+      <section className="pt-8 pb-20">
         <div className="container mx-auto px-4">
           {displayProducts.length === 0 ? (
             <div className="text-center py-16">
