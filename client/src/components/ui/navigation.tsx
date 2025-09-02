@@ -108,7 +108,7 @@ export function StickyQuoteButton() {
       <Link href="/contact">
         <a>
           <Button
-            className="bg-accent text-accent-foreground shadow-lg hover:shadow-xl hover:bg-accent/90 rounded-full px-6 py-3"
+            className="bg-accent text-accent-foreground shadow-lg hover:shadow-xl hover:bg-white hover:text-accent hover:border-accent border border-transparent rounded-full px-6 py-3 transition-colors duration-300"
             data-testid="sticky-message-button"
           >
             <MessageCircle className="h-4 w-4 mr-2" />
