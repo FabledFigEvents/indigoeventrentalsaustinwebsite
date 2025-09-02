@@ -414,7 +414,7 @@ export default function Home() {
                 <Button
                   variant="outline"
                   size="lg"
-                  className="border-2 border-accent-foreground text-accent-foreground hover:bg-accent-foreground hover:text-accent px-8 py-4 text-lg"
+                  className="border-2 border-accent-foreground text-primary hover:bg-accent-foreground hover:text-accent px-8 py-4 text-lg"
                   data-testid="browse-catalog-button"
                 >
                   Browse the Catalog
